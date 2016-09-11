@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = require('redux');
 
-var _exampleActions = require('../actions/example-actions');
+var _vrfActions = require('../actions/vrf-actions');
 
-var actions = _interopRequireWildcard(_exampleActions);
+var actions = _interopRequireWildcard(_vrfActions);
 
 var _reduxForm = require('redux-form');
 

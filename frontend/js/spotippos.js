@@ -10,6 +10,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _header = require('./components/header');
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = require('./components/menu');
+
+var _menu2 = _interopRequireDefault(_menu);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18,26 +26,40 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RealtyCard = function (_Component) {
-    _inherits(RealtyCard, _Component);
+var Spotippos = function (_Component) {
+    _inherits(Spotippos, _Component);
 
-    function RealtyCard(props) {
-        _classCallCheck(this, RealtyCard);
+    function Spotippos(props) {
+        _classCallCheck(this, Spotippos);
 
-        return _possibleConstructorReturn(this, (RealtyCard.__proto__ || Object.getPrototypeOf(RealtyCard)).call(this, props));
+        return _possibleConstructorReturn(this, (Spotippos.__proto__ || Object.getPrototypeOf(Spotippos)).call(this, props));
     }
 
-    _createClass(RealtyCard, [{
+    _createClass(Spotippos, [{
         key: 'render',
         value: function render() {
+            var children = this.props.children;
 
-            return _react2.default.createElement('div', null);
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'full-height' },
+                _react2.default.createElement(_header2.default, null),
+                _react2.default.createElement(_menu2.default, null),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'page' },
+                    children
+                )
+            );
         }
     }]);
 
-    return RealtyCard;
+    return Spotippos;
 }(_react.Component);
 
-RealtyCard.propTypes = {};
+Spotippos.propTypes = {
+    children: _react.PropTypes.object.isRequired
+};
 
-exports.default = RealtyCard;
+exports.default = Spotippos;

@@ -32,8 +32,8 @@ var RealtiesPage = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
-                'Hellow World'
+                { className: 'realties-page' },
+                'oooo'
             );
         }
     }]);

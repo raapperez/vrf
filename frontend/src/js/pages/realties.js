@@ -10,7 +10,9 @@ class RealtiesPage extends Component {
 
     render() {
         return (
-            <div>Hellow World</div>
+            <div className="realties-page">
+oooo
+            </div>
         );
     }
 }

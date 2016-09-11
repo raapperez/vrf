@@ -1,7 +1,7 @@
 'use strict';
 
 import {createStore, combineReducers} from 'redux';
-import * as actions from '../actions/example-actions';
+import * as actions from '../actions/vrf-actions';
 import {reducer as formReducer} from 'redux-form';
 
 const combinedReducers = combineReducers({
