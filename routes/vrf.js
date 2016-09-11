@@ -8,14 +8,12 @@ const {routes} = require('../frontend/js/vrf');
 const ReactDOMServer = require('react-dom/server');
 
 router.get('*', function (req, res, next) {
-  console.log(req.url);
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       next(error);
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      console.log(renderProps);
       res.status(200).render('vrf', {
         data: {
           entryPoint: ReactDOMServer.renderToString(vrf(renderProps))

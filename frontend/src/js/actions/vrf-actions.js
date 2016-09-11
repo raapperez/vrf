@@ -1,6 +1,7 @@
 'use strict';
 
-export const ACTION = 'ACTION';
-export const action = () => ({
-    type: ACTION
+export const SET_PROPERTIES = 'SET_PROPERTIES';
+export const setProperties = properties => ({
+    type: SET_PROPERTIES,
+    properties
 });

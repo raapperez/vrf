@@ -2,21 +2,24 @@
 
 import React, {Component, PropTypes} from 'react';
 
-class RealtyCard extends Component {
+class PropertyCard extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
+        const {property} = this.props;
 
         return (
             <div>
+                {property.id}
             </div>
         );
     }
 }
 
-RealtyCard.propTypes = {
+PropertyCard.propTypes = {
+    property: PropTypes.object.isRequired
 };
 
-export default RealtyCard;
+export default PropertyCard;
