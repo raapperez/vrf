@@ -18,16 +18,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ExamplePage = function (_Component) {
-    _inherits(ExamplePage, _Component);
+var RealtiesPage = function (_Component) {
+    _inherits(RealtiesPage, _Component);
 
-    function ExamplePage(props) {
-        _classCallCheck(this, ExamplePage);
+    function RealtiesPage(props) {
+        _classCallCheck(this, RealtiesPage);
 
-        return _possibleConstructorReturn(this, (ExamplePage.__proto__ || Object.getPrototypeOf(ExamplePage)).call(this, props));
+        return _possibleConstructorReturn(this, (RealtiesPage.__proto__ || Object.getPrototypeOf(RealtiesPage)).call(this, props));
     }
 
-    _createClass(ExamplePage, [{
+    _createClass(RealtiesPage, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -38,7 +38,7 @@ var ExamplePage = function (_Component) {
         }
     }]);
 
-    return ExamplePage;
+    return RealtiesPage;
 }(_react.Component);
 
-exports.default = ExamplePage;
+exports.default = RealtiesPage;

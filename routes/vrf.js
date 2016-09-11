@@ -3,8 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const {match} = require('react-router');
-const example = require('../frontend/js/example').default;
-const {routes} = require('../frontend/js/example');
+const vrf = require('../frontend/js/vrf').default;
+const {routes} = require('../frontend/js/vrf');
 const ReactDOMServer = require('react-dom/server');
 
 router.get('*', function (req, res, next) {
@@ -14,9 +14,9 @@ router.get('*', function (req, res, next) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      res.status(200).render('example', {
+      res.status(200).render('vrf', {
         data: {
-          entryPoint: ReactDOMServer.renderToString(example(renderProps))
+          entryPoint: ReactDOMServer.renderToString(vrf(renderProps))
         }
       });
     } else {

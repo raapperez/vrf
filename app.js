@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('winston');
-const exampleRoutes = require('./routes/example');
+const vrfRoutes = require('./routes/vrf');
 const lodashExpress = require('lodash-express');
 const compression = require('compression');
 
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', exampleRoutes);
+app.use('/', vrfRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

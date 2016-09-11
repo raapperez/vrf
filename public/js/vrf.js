@@ -50,15 +50,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _example = __webpack_require__(166);
+	var _vrf = __webpack_require__(166);
 
-	var _example2 = _interopRequireDefault(_example);
+	var _vrf2 = _interopRequireDefault(_vrf);
 
 	var _reactRouter = __webpack_require__(173);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render((0, _example2.default)({ history: _reactRouter.browserHistory, children: _example.routes }), document.getElementById('entry-point'));
+	_reactDom2.default.render((0, _vrf2.default)({ history: _reactRouter.browserHistory, children: _vrf.routes }), document.getElementById('entry-point'));
 
 /***/ },
 /* 1 */
@@ -20776,15 +20776,15 @@
 
 	var _reactRouter = __webpack_require__(173);
 
-	var _example = __webpack_require__(236);
+	var _realties = __webpack_require__(236);
 
-	var _example2 = _interopRequireDefault(_example);
+	var _realties2 = _interopRequireDefault(_realties);
 
 	var _reactRedux = __webpack_require__(237);
 
-	var _exampleStore = __webpack_require__(259);
+	var _vrfStore = __webpack_require__(429);
 
-	var _exampleStore2 = _interopRequireDefault(_exampleStore);
+	var _vrfStore2 = _interopRequireDefault(_vrfStore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20794,14 +20794,14 @@
 	            var children = _ref.children;
 	            return children;
 	        } },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/index', component: _example2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: '*', to: '/index' })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/anuncios', component: _realties2.default }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: '*', to: '/anuncios' })
 	);
 
 	exports.default = function (renderProps) {
 	    return _react2.default.createElement(
 	        _reactRedux.Provider,
-	        { store: _exampleStore2.default },
+	        { store: _vrfStore2.default },
 	        _react2.default.createElement(_reactRouter.Router, renderProps)
 	    );
 	};
@@ -27049,16 +27049,16 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ExamplePage = function (_Component) {
-	    _inherits(ExamplePage, _Component);
+	var RealtiesPage = function (_Component) {
+	    _inherits(RealtiesPage, _Component);
 
-	    function ExamplePage(props) {
-	        _classCallCheck(this, ExamplePage);
+	    function RealtiesPage(props) {
+	        _classCallCheck(this, RealtiesPage);
 
-	        return _possibleConstructorReturn(this, (ExamplePage.__proto__ || Object.getPrototypeOf(ExamplePage)).call(this, props));
+	        return _possibleConstructorReturn(this, (RealtiesPage.__proto__ || Object.getPrototypeOf(RealtiesPage)).call(this, props));
 	    }
 
-	    _createClass(ExamplePage, [{
+	    _createClass(RealtiesPage, [{
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -27069,10 +27069,10 @@
 	        }
 	    }]);
 
-	    return ExamplePage;
+	    return RealtiesPage;
 	}(_react.Component);
 
-	exports.default = ExamplePage;
+	exports.default = RealtiesPage;
 
 /***/ },
 /* 237 */
@@ -28560,37 +28560,7 @@
 	}
 
 /***/ },
-/* 259 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _redux = __webpack_require__(244);
-
-	var _exampleActions = __webpack_require__(260);
-
-	var actions = _interopRequireWildcard(_exampleActions);
-
-	var _reduxForm = __webpack_require__(261);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	var combinedReducers = (0, _redux.combineReducers)({
-	    form: _reduxForm.reducer
-	});
-
-	var rootReducer = function rootReducer(state, action) {
-	    return combinedReducers(state, action);
-	};
-	var store = (0, _redux.createStore)(rootReducer);
-
-	exports.default = store;
-
-/***/ },
+/* 259 */,
 /* 260 */
 /***/ function(module, exports) {
 
@@ -37330,6 +37300,37 @@
 	};
 
 	exports.default = propTypes;
+
+/***/ },
+/* 429 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _redux = __webpack_require__(244);
+
+	var _exampleActions = __webpack_require__(260);
+
+	var actions = _interopRequireWildcard(_exampleActions);
+
+	var _reduxForm = __webpack_require__(261);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var combinedReducers = (0, _redux.combineReducers)({
+	    form: _reduxForm.reducer
+	});
+
+	var rootReducer = function rootReducer(state, action) {
+	    return combinedReducers(state, action);
+	};
+	var store = (0, _redux.createStore)(rootReducer);
+
+	exports.default = store;
 
 /***/ }
 /******/ ]);

@@ -2,7 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 
-class ExamplePage extends Component {
+class RealtiesPage extends Component {
 
     constructor(props) {
         super(props);
@@ -15,4 +15,4 @@ class ExamplePage extends Component {
     }
 }
 
-export default ExamplePage;
+export default RealtiesPage;

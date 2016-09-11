@@ -15,7 +15,7 @@ if(env === 'production'){
 
 module.exports = {
     entry: {
-        'public/js/example': './frontend/src/js/example-entry.js'
+        'public/js/vrf': './frontend/src/js/vrf-entry.js'
     },
     output: {
         path: './',

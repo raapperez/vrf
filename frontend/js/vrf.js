@@ -11,15 +11,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _example = require('./pages/example');
+var _realties = require('./pages/realties');
 
-var _example2 = _interopRequireDefault(_example);
+var _realties2 = _interopRequireDefault(_realties);
 
 var _reactRedux = require('react-redux');
 
-var _exampleStore = require('./stores/example-store');
+var _vrfStore = require('./stores/vrf-store');
 
-var _exampleStore2 = _interopRequireDefault(_exampleStore);
+var _vrfStore2 = _interopRequireDefault(_vrfStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,14 +29,14 @@ var routes = exports.routes = _react2.default.createElement(
             var children = _ref.children;
             return children;
         } },
-    _react2.default.createElement(_reactRouter.Route, { path: '/index', component: _example2.default }),
-    _react2.default.createElement(_reactRouter.Redirect, { from: '*', to: '/index' })
+    _react2.default.createElement(_reactRouter.Route, { path: '/anuncios', component: _realties2.default }),
+    _react2.default.createElement(_reactRouter.Redirect, { from: '*', to: '/anuncios' })
 );
 
 exports.default = function (renderProps) {
     return _react2.default.createElement(
         _reactRedux.Provider,
-        { store: _exampleStore2.default },
+        { store: _vrfStore2.default },
         _react2.default.createElement(_reactRouter.Router, renderProps)
     );
 };
