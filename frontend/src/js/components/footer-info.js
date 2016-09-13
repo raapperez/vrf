@@ -14,7 +14,7 @@ class FooterInfo extends Component {
         return (
             <div className="footer-info-component">
                 <div className="info">
-                    <img src={imgUrl} />
+                    <img className="no-select" src={imgUrl} />
                     <span>{children}</span>
                 </div>
             </div>

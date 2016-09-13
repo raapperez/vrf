@@ -20,7 +20,7 @@ class PropertyCard extends Component {
         return (
             <div className="property-card-component">
                 <div className="left-box">                    
-                    <img src={property.img} />
+                    <img className="no-select" src={property.img} />
                     <span className="price">{this.formatPrice(property.price)}</span>
                 </div>
                 <div className="right-box">

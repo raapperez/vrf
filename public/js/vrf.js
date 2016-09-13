@@ -38181,7 +38181,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'left-box' },
-	                    _react2.default.createElement('img', { src: property.img }),
+	                    _react2.default.createElement('img', { className: 'no-select', src: property.img }),
 	                    _react2.default.createElement(
 	                        'span',
 	                        { className: 'price' },
@@ -46068,7 +46068,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'info' },
-	                    _react2.default.createElement('img', { src: imgUrl }),
+	                    _react2.default.createElement('img', { className: 'no-select', src: imgUrl }),
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
