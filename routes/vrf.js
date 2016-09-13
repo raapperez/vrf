@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const {match} = require('react-router');
-const vrf = require('../frontend/js/vrf').serverSide;
+const {serverSide} = require('../frontend/js/vrf');
 const {routes} = require('../frontend/js/vrf');
 const ReactDOMServer = require('react-dom/server');
 
@@ -14,9 +14,12 @@ router.get('*', function (req, res, next) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
+
+      const initialState = undefined;
       res.status(200).render('vrf', {
         data: {
-          entryPoint: ReactDOMServer.renderToString(vrf(renderProps))
+          entryPoint: ReactDOMServer.renderToString(serverSide(renderProps)),
+          initialState
         }
       });
     } else {

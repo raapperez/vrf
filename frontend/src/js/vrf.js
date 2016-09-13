@@ -3,7 +3,7 @@
 import React from 'react';
 import { Route, Redirect, Router, RouterContext} from 'react-router';
 import {Provider} from 'react-redux';
-import store from './stores/vrf-store';
+import {getStore} from './stores/vrf-store';
 import Spotippos from './spotippos';
 import RealtiesPage from './pages/realties';
 import NoPage from './pages/no-page';
@@ -17,14 +17,14 @@ export const routes = (
     </Route>
 );
 
-export const serverSide = (renderProps) => (
-    <Provider store={store}>
+export const serverSide = (renderProps, initialState) => (
+    <Provider store={getStore(initialState)}>
         <RouterContext {...renderProps} />
     </Provider>
 );
 
-export const clientSide = (renderProps) => (
-    <Provider store={store}>
+export const clientSide = renderProps => (
+    <Provider store={getStore(window.__PRELOADED_STATE__)}>
         <Router {...renderProps}/>
     </Provider>
 );
