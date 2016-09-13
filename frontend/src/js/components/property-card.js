@@ -11,7 +11,7 @@ class PropertyCard extends Component {
     }
 
     formatPrice(price) {
-        return currencyFormatter.format(price, {code: 'BRL'}).replace(/,.*$/, ''); 
+        return currencyFormatter.format(price, { code: 'BRL' }).replace(/,.*$/, '');
     }
 
     render() {
@@ -19,7 +19,7 @@ class PropertyCard extends Component {
 
         return (
             <div className="property-card-component">
-                <div className="left-box">                    
+                <div className="left-box">
                     <img className="no-select" src={property.img} />
                     <span className="price">{this.formatPrice(property.price)}</span>
                 </div>
@@ -35,10 +35,10 @@ class PropertyCard extends Component {
                             {property.squareMeters} M²
                         </FooterInfo>
                         <FooterInfo imgUrl="/imgs/ic-card-beds.svg">
-                            {property.beds} Quartos
+                            {property.beds} Quarto{parseInt(property.beds) === 1 ? '' : 's'}
                         </FooterInfo>
                         <FooterInfo imgUrl="/imgs/ic-card-bathroom.svg">
-                            {property.baths} Banheiros
+                            {property.baths} Banheiro{parseInt(property.baths) === 1 ? '' : 's'}
                         </FooterInfo>
                         <Link to={`/anuncio/${property.id}`}>Visualizar anúncio</Link>
                     </div>

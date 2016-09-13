@@ -16,6 +16,10 @@ var _footerInfo = require('./footer-info');
 
 var _footerInfo2 = _interopRequireDefault(_footerInfo);
 
+var _currencyFormatter = require('currency-formatter');
+
+var _currencyFormatter2 = _interopRequireDefault(_currencyFormatter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34,6 +38,11 @@ var PropertyCard = function (_Component) {
     }
 
     _createClass(PropertyCard, [{
+        key: 'formatPrice',
+        value: function formatPrice(price) {
+            return _currencyFormatter2.default.format(price, { code: 'BRL' }).replace(/,.*$/, '');
+        }
+    }, {
         key: 'render',
         value: function render() {
             var property = this.props.property;
@@ -45,12 +54,11 @@ var PropertyCard = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'left-box' },
-                    _react2.default.createElement('img', { src: property.img }),
+                    _react2.default.createElement('img', { className: 'no-select', src: property.img }),
                     _react2.default.createElement(
                         'span',
                         { className: 'price' },
-                        'R$ ',
-                        property.price
+                        this.formatPrice(property.price)
                     )
                 ),
                 _react2.default.createElement(
@@ -89,13 +97,15 @@ var PropertyCard = function (_Component) {
                             _footerInfo2.default,
                             { imgUrl: '/imgs/ic-card-beds.svg' },
                             property.beds,
-                            ' Quartos'
+                            ' Quarto',
+                            parseInt(property.beds) === 1 ? '' : 's'
                         ),
                         _react2.default.createElement(
                             _footerInfo2.default,
                             { imgUrl: '/imgs/ic-card-bathroom.svg' },
                             property.baths,
-                            ' Banheiros'
+                            ' Banheiro',
+                            parseInt(property.baths) === 1 ? '' : 's'
                         ),
                         _react2.default.createElement(
                             _reactRouter.Link,
