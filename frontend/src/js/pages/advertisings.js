@@ -6,7 +6,7 @@ import PropertyList from '../components/property-list';
 import spotipposApi from '../services/spotipposApi';
 import {setProperties} from '../actions/vrf-actions';
 
-class RealtiesPage extends Component {
+class AdvertisingsPage extends Component {
 
     constructor(props) {
         super(props);
@@ -24,25 +24,31 @@ class RealtiesPage extends Component {
         const {properties} = this.props;
 
         return (
-            <div className="realties-page">
+            <div className="advertisings-page">
                 <PropertyList properties={properties} />
             </div>
         );
     }
 }
 
-RealtiesPage.propTypes = {
+AdvertisingsPage.propTypes = {
     properties: PropTypes.array.isRequired,
     getProperties: PropTypes.func.isRequired
 };
 
+function getRandomImg() {
+    return `/imgs/property_placeholder_${Math.floor(Math.random() * 5)}.jpg`;
+}
 
 export default connect(
     state => ({ properties: state.properties }),
     dispatch => ({
         getProperties: () => {
             return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(response => {
-                dispatch(setProperties(response.properties));
+                dispatch(setProperties(response.properties.map(property => {
+                    property.img = getRandomImg();
+                    return property;
+                })));
             });
         }
-    }))(RealtiesPage);
+    }))(AdvertisingsPage);

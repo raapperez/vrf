@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propertyCard = require('./property-card');
-
-var _propertyCard2 = _interopRequireDefault(_propertyCard);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22,38 +18,46 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PropertyList = function (_Component) {
-    _inherits(PropertyList, _Component);
+var FooterInfo = function (_Component) {
+    _inherits(FooterInfo, _Component);
 
-    function PropertyList(props) {
-        _classCallCheck(this, PropertyList);
+    function FooterInfo(props) {
+        _classCallCheck(this, FooterInfo);
 
-        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
+        return _possibleConstructorReturn(this, (FooterInfo.__proto__ || Object.getPrototypeOf(FooterInfo)).call(this, props));
     }
 
-    _createClass(PropertyList, [{
+    _createClass(FooterInfo, [{
         key: 'render',
         value: function render() {
-            var properties = this.props.properties;
+            var _props = this.props;
+            var imgUrl = _props.imgUrl;
+            var children = _props.children;
 
 
             return _react2.default.createElement(
                 'div',
-                { className: 'property-list-component' },
-                properties.filter(function (property) {
-                    return property.id > 7900;
-                }).map(function (property) {
-                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property });
-                })
+                { className: 'footer-info-component' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'info' },
+                    _react2.default.createElement('img', { src: imgUrl }),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        children
+                    )
+                )
             );
         }
     }]);
 
-    return PropertyList;
+    return FooterInfo;
 }(_react.Component);
 
-PropertyList.propTypes = {
-    properties: _react.PropTypes.array.isRequired
+FooterInfo.propTypes = {
+    imgUrl: _react.PropTypes.string.isRequired,
+    children: _react.PropTypes.array.isRequired
 };
 
-exports.default = PropertyList;
+exports.default = FooterInfo;

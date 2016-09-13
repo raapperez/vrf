@@ -10,6 +10,12 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
+var _footerInfo = require('./footer-info');
+
+var _footerInfo2 = _interopRequireDefault(_footerInfo);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35,8 +41,63 @@ var PropertyCard = function (_Component) {
 
             return _react2.default.createElement(
                 'div',
-                null,
-                property.id
+                { className: 'property-card-component' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'left-box' },
+                    _react2.default.createElement('img', { src: property.img })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'right-box' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'content' },
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'id' },
+                            'ID. ',
+                            property.id
+                        ),
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'title' },
+                            property.title
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'description' },
+                            property.description
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'footer' },
+                        _react2.default.createElement(
+                            _footerInfo2.default,
+                            { imgUrl: '/imgs/ic-card-area.svg' },
+                            property.squareMeters,
+                            ' M²'
+                        ),
+                        _react2.default.createElement(
+                            _footerInfo2.default,
+                            { imgUrl: '/imgs/ic-card-beds.svg' },
+                            property.beds,
+                            ' Quartos'
+                        ),
+                        _react2.default.createElement(
+                            _footerInfo2.default,
+                            { imgUrl: '/imgs/ic-card-bathroom.svg' },
+                            property.baths,
+                            ' Banheiros'
+                        ),
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/anuncio/' + property.id },
+                            'Visualizar anúncio'
+                        )
+                    )
+                )
             );
         }
     }]);
