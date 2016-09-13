@@ -3,10 +3,15 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import FooterInfo from './footer-info';
+import currencyFormatter from 'currency-formatter';
 
 class PropertyCard extends Component {
     constructor(props) {
         super(props);
+    }
+
+    formatPrice(price) {
+        return currencyFormatter.format(price, {code: 'BRL'}).replace(/,.*$/, ''); 
     }
 
     render() {
@@ -14,8 +19,9 @@ class PropertyCard extends Component {
 
         return (
             <div className="property-card-component">
-                <div className="left-box">
+                <div className="left-box">                    
                     <img src={property.img} />
+                    <span className="price">{this.formatPrice(property.price)}</span>
                 </div>
                 <div className="right-box">
                     <div className="content">

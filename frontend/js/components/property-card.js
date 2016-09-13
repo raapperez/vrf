@@ -45,7 +45,13 @@ var PropertyCard = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'left-box' },
-                    _react2.default.createElement('img', { src: property.img })
+                    _react2.default.createElement('img', { src: property.img }),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'price' },
+                        'R$ ',
+                        property.price
+                    )
                 ),
                 _react2.default.createElement(
                     'div',
