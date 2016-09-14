@@ -16,12 +16,14 @@ class AdvertisingsPage extends Component {
     }
 
     componentDidMount() {
-        const {properties, getProperties, setFilteredProperties} = this.props;
-
+        const {properties, getProperties, setFilteredProperties, location} = this.props;
+        
         if (!properties.length) {
-            getProperties().then(response => {
-                setFilteredProperties(response);
+            getProperties().then(properties => {
+                setFilteredProperties(filterService.filterProperties(properties, location.query));
             });
+        } else {
+            setFilteredProperties(filterService.filterProperties(properties, location.query));
         }
     }
 
@@ -29,10 +31,7 @@ class AdvertisingsPage extends Component {
         const {location, properties, setFilteredProperties} = nextProps;
 
         if(!_.isEqual(location.query, this.props.location.query)) {
-            console.log(properties, location.query);
-            const filteredProperties = filterService.filterProperties(properties, location.query);
-            setFilteredProperties(filteredProperties);   
-            console.log('a', filteredProperties);     
+            setFilteredProperties(filterService.filterProperties(properties, location.query));   
         }
     }
 

@@ -58,12 +58,15 @@ var AdvertisingsPage = function (_Component) {
             var properties = _props.properties;
             var getProperties = _props.getProperties;
             var setFilteredProperties = _props.setFilteredProperties;
+            var location = _props.location;
 
 
             if (!properties.length) {
-                getProperties().then(function (response) {
-                    setFilteredProperties(response);
+                getProperties().then(function (properties) {
+                    setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
                 });
+            } else {
+                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
             }
         }
     }, {
@@ -75,10 +78,7 @@ var AdvertisingsPage = function (_Component) {
 
 
             if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
-                console.log(properties, location.query);
-                var filteredProperties = _filter2.default.filterProperties(properties, location.query);
-                setFilteredProperties(filteredProperties);
-                console.log('a', filteredProperties);
+                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
             }
         }
     }, {
