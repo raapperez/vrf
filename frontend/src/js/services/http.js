@@ -15,9 +15,9 @@ const status = (response) => {
 const json = (response) => response.json().catch(() => null);
 
 
-class Http {
+function Http (fetch) {
 
-    get(path, query = {}, options = {}) {
+    function get(path, query = {}, options = {}) {
 
         let queryString = Object.entries(query).map(entry => {
 
@@ -35,22 +35,17 @@ class Http {
         return fetch(`${path}${queryString}`, Object.assign({}, options, { method: 'GET' })).then(status).then(json);
     }
 
-    post(path, body = {}, options = {}) {
+    function post(path, body = {}, options = {}) {
         return fetch(path, Object.assign({}, options, { method: 'POST', body: JSON.stringify(body) })).then(status).then(json);
     }
 
-    upload(path, formData, options = {}) {
-        return fetch(path, Object.assign({}, options, { method: 'POST', body: formData })).then(status).then(json);
-    }
-
-    put(path, body = {}, options = {}) {
+    function put(path, body = {}, options = {}) {
         return fetch(path, Object.assign({}, options, { method: 'PUT', body: JSON.stringify(body) })).then(status).then(json);
     }
 
-    delete(path, options = {}) {
-        return fetch(path, Object.assign({}, options, { method: 'DELETE' })).then(status).then(json);
-    }
+    return {
+        get, post, put
+    };
 }
 
-
-export default new Http();
+export default Http;

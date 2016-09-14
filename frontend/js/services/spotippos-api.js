@@ -20,26 +20,27 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var spotipposApi = function () {
-    function spotipposApi(host) {
-        _classCallCheck(this, spotipposApi);
+var SpotipposApi = function () {
+    function SpotipposApi(http) {
+        _classCallCheck(this, SpotipposApi);
 
-        this.host = host;
+        this.host = constants.spotipposApiHost;
+        this.http = http;
     }
 
-    _createClass(spotipposApi, [{
+    _createClass(SpotipposApi, [{
         key: 'get',
         value: function get(resource, id) {
-            return _http2.default.get(this.host + '/' + resource + '/' + id);
+            return this.http.get(this.host + '/' + resource + '/' + id);
         }
     }, {
         key: 'list',
         value: function list(resource, query) {
-            return _http2.default.get(this.host + '/' + resource, query);
+            return this.http.get(this.host + '/' + resource, query);
         }
     }]);
 
-    return spotipposApi;
+    return SpotipposApi;
 }();
 
-exports.default = new spotipposApi(constants.spotipposApiHost);
+exports.default = SpotipposApi;

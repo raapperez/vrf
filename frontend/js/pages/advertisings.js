@@ -16,6 +16,10 @@ var _propertyList = require('../components/property-list');
 
 var _propertyList2 = _interopRequireDefault(_propertyList);
 
+var _http = require('../services/http');
+
+var _http2 = _interopRequireDefault(_http);
+
 var _spotipposApi = require('../services/spotippos-api');
 
 var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
@@ -114,8 +118,8 @@ AdvertisingsPage.propTypes = {
     setFilteredProperties: _react.PropTypes.func.isRequired
 };
 
-function getRandomImg() {
-    return '/imgs/property_placeholder_' + Math.floor(Math.random() * 5) + '.jpg';
+function getRandomImg(id) {
+    return '/imgs/property_placeholder_' + id % 5 + '.jpg';
 }
 
 exports.default = (0, _reactRedux.connect)(function (state) {
@@ -123,10 +127,12 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 }, function (dispatch) {
     return {
         getProperties: function getProperties() {
-            return _spotipposApi2.default.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
+            var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
+
+            return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
                 var properties = _lodash2.default.take(response.properties, 20);
                 dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
-                    property.img = getRandomImg();
+                    property.img = getRandomImg(property.id);
                     return property;
                 })));
                 return properties;

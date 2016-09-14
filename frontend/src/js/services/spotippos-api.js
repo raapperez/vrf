@@ -1,22 +1,23 @@
 'use strict';
 
 import * as constants from '../constants';
-import http from './http';
+import Http from './http';
 
-class spotipposApi {
+class SpotipposApi {
 
-    constructor(host) {
-        this.host = host;
+    constructor(http) {
+        this.host = constants.spotipposApiHost;
+        this.http = http;        
     }
 
     get(resource, id) {
-        return http.get(`${this.host}/${resource}/${id}`);
+        return this.http.get(`${this.host}/${resource}/${id}`);
         
     }
 
     list(resource, query) {
-        return http.get(`${this.host}/${resource}`, query);
+        return this.http.get(`${this.host}/${resource}`, query);
     }
 }
 
-export default new spotipposApi(constants.spotipposApiHost);
+export default SpotipposApi;
