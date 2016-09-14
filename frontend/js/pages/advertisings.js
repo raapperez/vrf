@@ -16,7 +16,7 @@ var _propertyList = require('../components/property-list');
 
 var _propertyList2 = _interopRequireDefault(_propertyList);
 
-var _spotipposApi = require('../services/spotipposApi');
+var _spotipposApi = require('../services/spotippos-api');
 
 var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
 
@@ -25,6 +25,14 @@ var _vrfActions = require('../actions/vrf-actions');
 var _filterBox = require('../components/filter-box');
 
 var _filterBox2 = _interopRequireDefault(_filterBox);
+
+var _filter = require('../services/filter');
+
+var _filter2 = _interopRequireDefault(_filter);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49,31 +57,46 @@ var AdvertisingsPage = function (_Component) {
             var _props = this.props;
             var properties = _props.properties;
             var getProperties = _props.getProperties;
+            var setFilteredProperties = _props.setFilteredProperties;
 
 
             if (!properties.length) {
-                getProperties();
+                getProperties().then(function (response) {
+                    setFilteredProperties(response);
+                });
+            }
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            var location = nextProps.location;
+            var properties = nextProps.properties;
+            var setFilteredProperties = nextProps.setFilteredProperties;
+
+
+            if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
+                console.log(properties, location.query);
+                var filteredProperties = _filter2.default.filterProperties(properties, location.query);
+                setFilteredProperties(filteredProperties);
+                console.log('a', filteredProperties);
             }
         }
     }, {
         key: 'render',
         value: function render() {
             var _props2 = this.props;
-            var properties = _props2.properties;
+            var filteredProperties = _props2.filteredProperties;
             var location = _props2.location;
-            var filter = _props2.filter;
 
-
-            console.log(filter);
 
             return _react2.default.createElement(
                 'div',
                 { className: 'advertisings-page' },
-                _react2.default.createElement(_filterBox2.default, { location: location }),
+                _react2.default.createElement(_filterBox2.default, { filter: location.query }),
                 _react2.default.createElement(
                     'div',
                     { className: 'page-content' },
-                    _react2.default.createElement(_propertyList2.default, { properties: properties })
+                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties })
                 )
             );
         }
@@ -86,7 +109,9 @@ AdvertisingsPage.propTypes = {
     properties: _react.PropTypes.array.isRequired,
     getProperties: _react.PropTypes.func.isRequired,
     location: _react.PropTypes.object.isRequired,
-    filter: _react.PropTypes.object
+    filter: _react.PropTypes.object,
+    filteredProperties: _react.PropTypes.array.isRequired,
+    setFilteredProperties: _react.PropTypes.func.isRequired
 };
 
 function getRandomImg() {
@@ -94,16 +119,21 @@ function getRandomImg() {
 }
 
 exports.default = (0, _reactRedux.connect)(function (state) {
-    return { properties: state.properties, filter: state.form.filter && state.form.filter.values };
+    return { properties: state.properties, filteredProperties: state.filteredProperties, filter: state.form.filter && state.form.filter.values };
 }, function (dispatch) {
     return {
         getProperties: function getProperties() {
             return _spotipposApi2.default.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
-                dispatch((0, _vrfActions.setProperties)(response.properties.map(function (property) {
+                var properties = _lodash2.default.take(response.properties, 20);
+                dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
                     property.img = getRandomImg();
                     return property;
                 })));
+                return properties;
             });
+        },
+        setFilteredProperties: function setFilteredProperties(filteredProperties) {
+            dispatch((0, _vrfActions.setFilteredProperties)(filteredProperties));
         }
     };
 })(AdvertisingsPage);

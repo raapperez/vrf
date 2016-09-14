@@ -10,3 +10,11 @@ var setProperties = exports.setProperties = function setProperties(properties) {
         properties: properties
     };
 };
+
+var SET_FILTERED_PROPERTIES = exports.SET_FILTERED_PROPERTIES = 'SET_FILTERED_PROPERTIES';
+var setFilteredProperties = exports.setFilteredProperties = function setFilteredProperties(filteredProperties) {
+    return {
+        type: SET_FILTERED_PROPERTIES,
+        filteredProperties: filteredProperties
+    };
+};

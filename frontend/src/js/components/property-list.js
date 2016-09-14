@@ -16,7 +16,7 @@ class PropertyList extends Component {
 
         return (
             <div className="property-list-component">
-                {properties.filter(property => property.id > 7900).map(property => (
+                {properties.map(property => (
                     <PropertyCard key={property.id} property={property} />
                 )) }
             </div>

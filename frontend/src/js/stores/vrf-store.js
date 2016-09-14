@@ -13,8 +13,18 @@ const properties = (state = [], action) => {
     }
 };
 
+const filteredProperties = (state = [], action) => {
+    switch (action.type) {
+        case actions.SET_FILTERED_PROPERTIES:
+            return action.filteredProperties;
+        default:
+            return state;
+    }
+};
+
 const combinedReducers = combineReducers({
     properties,
+    filteredProperties,
     form: formReducer
 });
 

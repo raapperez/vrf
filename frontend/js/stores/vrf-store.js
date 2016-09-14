@@ -27,8 +27,21 @@ var properties = function properties() {
     }
 };
 
+var filteredProperties = function filteredProperties() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case actions.SET_FILTERED_PROPERTIES:
+            return action.filteredProperties;
+        default:
+            return state;
+    }
+};
+
 var combinedReducers = (0, _redux.combineReducers)({
     properties: properties,
+    filteredProperties: filteredProperties,
     form: _reduxForm.reducer
 });
 

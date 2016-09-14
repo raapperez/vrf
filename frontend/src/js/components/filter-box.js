@@ -2,6 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import FilterForm from './filter-form';
+import _ from 'lodash';
 
 class FilterBox extends Component {
     constructor(props) {
@@ -10,28 +11,30 @@ class FilterBox extends Component {
         this.doFilter = this.doFilter.bind(this);
     }
 
+    
+
     doFilter(params) {
         const {router} = this.context;
         router.push({
             pathname: '/anuncios',
-            query: params
+            query: _.pickBy(params)
         });
     }
 
     render() {
-        const {location} = this.props;
+        const {filter} = this.props;
 
         return (
             <div className="filter-box-component">
                 <span className="title">Filtro</span>
-                <FilterForm onSubmit={this.doFilter} initialValues={location.query} />
+                <FilterForm onSubmit={this.doFilter} initialValues={filter} />
             </div>
         );
     }
 }
 
 FilterBox.propTypes = {
-    location: PropTypes.object.isRequired
+    filter: PropTypes.object.isRequired
 };
 
 FilterBox.contextTypes = {

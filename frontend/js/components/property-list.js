@@ -40,9 +40,7 @@ var PropertyList = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'property-list-component' },
-                properties.filter(function (property) {
-                    return property.id > 7900;
-                }).map(function (property) {
+                properties.map(function (property) {
                     return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property });
                 })
             );

@@ -14,6 +14,10 @@ var _filterForm = require('./filter-form');
 
 var _filterForm2 = _interopRequireDefault(_filterForm);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41,13 +45,13 @@ var FilterBox = function (_Component) {
 
             router.push({
                 pathname: '/anuncios',
-                query: params
+                query: _lodash2.default.pickBy(params)
             });
         }
     }, {
         key: 'render',
         value: function render() {
-            var location = this.props.location;
+            var filter = this.props.filter;
 
 
             return _react2.default.createElement(
@@ -58,7 +62,7 @@ var FilterBox = function (_Component) {
                     { className: 'title' },
                     'Filtro'
                 ),
-                _react2.default.createElement(_filterForm2.default, { onSubmit: this.doFilter, initialValues: location.query })
+                _react2.default.createElement(_filterForm2.default, { onSubmit: this.doFilter, initialValues: filter })
             );
         }
     }]);
@@ -67,7 +71,7 @@ var FilterBox = function (_Component) {
 }(_react.Component);
 
 FilterBox.propTypes = {
-    location: _react.PropTypes.object.isRequired
+    filter: _react.PropTypes.object.isRequired
 };
 
 FilterBox.contextTypes = {
