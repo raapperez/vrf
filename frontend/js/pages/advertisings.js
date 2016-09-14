@@ -22,6 +22,10 @@ var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
 
 var _vrfActions = require('../actions/vrf-actions');
 
+var _filterBox = require('../components/filter-box');
+
+var _filterBox2 = _interopRequireDefault(_filterBox);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60,7 +64,12 @@ var AdvertisingsPage = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'advertisings-page' },
-                _react2.default.createElement(_propertyList2.default, { properties: properties })
+                _react2.default.createElement(_filterBox2.default, null),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'page-content' },
+                    _react2.default.createElement(_propertyList2.default, { properties: properties })
+                )
             );
         }
     }]);

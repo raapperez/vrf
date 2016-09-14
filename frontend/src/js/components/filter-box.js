@@ -10,7 +10,8 @@ class FilterBox extends Component {
     render() {
 
         return (
-            <div>
+            <div className="filter-box-component">
+            filter box
             </div>
         );
     }

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import PropertyList from '../components/property-list';
 import spotipposApi from '../services/spotipposApi';
 import {setProperties} from '../actions/vrf-actions';
+import FilterBox from '../components/filter-box';
 
 class AdvertisingsPage extends Component {
 
@@ -25,7 +26,10 @@ class AdvertisingsPage extends Component {
 
         return (
             <div className="advertisings-page">
-                <PropertyList properties={properties} />
+                <FilterBox />
+                <div className="page-content">
+                    <PropertyList properties={properties} />
+                </div>
             </div>
         );
     }
@@ -51,4 +55,5 @@ export default connect(
                 })));
             });
         }
-    }))(AdvertisingsPage);
+    })
+)(AdvertisingsPage);
