@@ -1,0 +1,44 @@
+.form {
+    .row {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 14px 13px 18px 13px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+
+    label {
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: condensed;
+        line-height: 1.5;
+        color: @warmGreyColor;
+        text-transform: uppercase;
+        display: block;
+    }
+
+    input[type=text], input[type=number] {
+        border-radius: 2px;
+        background-color: @whiteFourColor;
+        border: solid 1px @warmGreyTwoColor;
+        padding-left: 8px;
+        line-height: 34px;
+        display: inline-block;
+    }
+
+    .separator {
+        width: 13px;
+        height: 1px;
+        background-color: @pinkishGreyColor;
+        display: inline-block;
+    }
+
+    .center-align {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}

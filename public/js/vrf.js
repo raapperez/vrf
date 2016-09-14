@@ -40492,7 +40492,83 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'filter-box-component' },
-	                'filter box'
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'title' },
+	                    'Filtro'
+	                ),
+	                _react2.default.createElement(
+	                    'form',
+	                    { className: 'form' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'label',
+	                                null,
+	                                'Id'
+	                            ),
+	                            _react2.default.createElement('input', { type: 'number' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'label',
+	                                null,
+	                                'Área'
+	                            ),
+	                            _react2.default.createElement('input', { type: 'number' })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'label',
+	                                null,
+	                                'Quartos'
+	                            ),
+	                            _react2.default.createElement('input', { type: 'number' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'label',
+	                                null,
+	                                'Banheiros'
+	                            ),
+	                            _react2.default.createElement('input', { type: 'number' })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'label',
+	                                null,
+	                                'Valor'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'center-align' },
+	                                _react2.default.createElement('input', { type: 'text', placeholder: 'Mínimo' }),
+	                                _react2.default.createElement('div', { className: 'separator' }),
+	                                _react2.default.createElement('input', { type: 'text', placeholder: 'Máximo' })
+	                            )
+	                        )
+	                    )
+	                )
 	            );
 	        }
 	    }]);
