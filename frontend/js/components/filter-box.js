@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _filterForm = require('./filter-form');
+
+var _filterForm2 = _interopRequireDefault(_filterForm);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24,12 +28,27 @@ var FilterBox = function (_Component) {
     function FilterBox(props) {
         _classCallCheck(this, FilterBox);
 
-        return _possibleConstructorReturn(this, (FilterBox.__proto__ || Object.getPrototypeOf(FilterBox)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (FilterBox.__proto__ || Object.getPrototypeOf(FilterBox)).call(this, props));
+
+        _this.doFilter = _this.doFilter.bind(_this);
+        return _this;
     }
 
     _createClass(FilterBox, [{
+        key: 'doFilter',
+        value: function doFilter(params) {
+            var router = this.context.router;
+
+            router.push({
+                pathname: '/anuncios',
+                query: params
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var location = this.props.location;
+
 
             return _react2.default.createElement(
                 'div',
@@ -39,78 +58,7 @@ var FilterBox = function (_Component) {
                     { className: 'title' },
                     'Filtro'
                 ),
-                _react2.default.createElement(
-                    'form',
-                    { className: 'form' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Id'
-                            ),
-                            _react2.default.createElement('input', { type: 'number' })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Área'
-                            ),
-                            _react2.default.createElement('input', { type: 'number' })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Quartos'
-                            ),
-                            _react2.default.createElement('input', { type: 'number' })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Banheiros'
-                            ),
-                            _react2.default.createElement('input', { type: 'number' })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Valor'
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'center-align' },
-                                _react2.default.createElement('input', { type: 'text', placeholder: 'Mínimo' }),
-                                _react2.default.createElement('div', { className: 'separator' }),
-                                _react2.default.createElement('input', { type: 'text', placeholder: 'Máximo' })
-                            )
-                        )
-                    )
-                )
+                _react2.default.createElement(_filterForm2.default, { onSubmit: this.doFilter, initialValues: location.query })
             );
         }
     }]);
@@ -118,6 +66,12 @@ var FilterBox = function (_Component) {
     return FilterBox;
 }(_react.Component);
 
-FilterBox.propTypes = {};
+FilterBox.propTypes = {
+    location: _react.PropTypes.object.isRequired
+};
+
+FilterBox.contextTypes = {
+    router: _react.PropTypes.object.isRequired
+};
 
 exports.default = FilterBox;

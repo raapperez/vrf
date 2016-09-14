@@ -58,13 +58,18 @@ var AdvertisingsPage = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var properties = this.props.properties;
+            var _props2 = this.props;
+            var properties = _props2.properties;
+            var location = _props2.location;
+            var filter = _props2.filter;
 
+
+            console.log(filter);
 
             return _react2.default.createElement(
                 'div',
                 { className: 'advertisings-page' },
-                _react2.default.createElement(_filterBox2.default, null),
+                _react2.default.createElement(_filterBox2.default, { location: location }),
                 _react2.default.createElement(
                     'div',
                     { className: 'page-content' },
@@ -79,7 +84,9 @@ var AdvertisingsPage = function (_Component) {
 
 AdvertisingsPage.propTypes = {
     properties: _react.PropTypes.array.isRequired,
-    getProperties: _react.PropTypes.func.isRequired
+    getProperties: _react.PropTypes.func.isRequired,
+    location: _react.PropTypes.object.isRequired,
+    filter: _react.PropTypes.object
 };
 
 function getRandomImg() {
@@ -87,7 +94,7 @@ function getRandomImg() {
 }
 
 exports.default = (0, _reactRedux.connect)(function (state) {
-    return { properties: state.properties };
+    return { properties: state.properties, filter: state.form.filter && state.form.filter.values };
 }, function (dispatch) {
     return {
         getProperties: function getProperties() {

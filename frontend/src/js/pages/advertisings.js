@@ -22,11 +22,13 @@ class AdvertisingsPage extends Component {
     }
 
     render() {
-        const {properties} = this.props;
+        const {properties, location, filter} = this.props;
+
+        console.log(filter);
 
         return (
             <div className="advertisings-page">
-                <FilterBox />
+                <FilterBox location={location} />
                 <div className="page-content">
                     <PropertyList properties={properties} />
                 </div>
@@ -37,7 +39,9 @@ class AdvertisingsPage extends Component {
 
 AdvertisingsPage.propTypes = {
     properties: PropTypes.array.isRequired,
-    getProperties: PropTypes.func.isRequired
+    getProperties: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
+    filter: PropTypes.object
 };
 
 function getRandomImg() {
@@ -45,7 +49,7 @@ function getRandomImg() {
 }
 
 export default connect(
-    state => ({ properties: state.properties }),
+    state => ({ properties: state.properties, filter: state.form.filter && state.form.filter.values }),
     dispatch => ({
         getProperties: () => {
             return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(response => {
