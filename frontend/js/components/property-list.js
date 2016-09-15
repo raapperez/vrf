@@ -41,7 +41,7 @@ var PropertyList = function (_Component) {
                 'div',
                 { className: 'property-list-component' },
                 properties.map(function (property) {
-                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property });
+                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property, showFooterBtn: true });
                 })
             );
         }

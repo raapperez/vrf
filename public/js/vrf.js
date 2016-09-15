@@ -28786,11 +28786,15 @@
 
 	var _spotippos2 = _interopRequireDefault(_spotippos);
 
-	var _advertisings = __webpack_require__(739);
+	var _advertising = __webpack_require__(739);
+
+	var _advertising2 = _interopRequireDefault(_advertising);
+
+	var _advertisings = __webpack_require__(748);
 
 	var _advertisings2 = _interopRequireDefault(_advertisings);
 
-	var _noPage = __webpack_require__(753);
+	var _noPage = __webpack_require__(754);
 
 	var _noPage2 = _interopRequireDefault(_noPage);
 
@@ -28801,7 +28805,7 @@
 	    { path: '', component: _spotippos2.default },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/anuncios', component: _advertisings2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/novo-anuncio', component: _noPage2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/anuncio/:id', component: _noPage2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/anuncio/:id', component: _advertising2.default }),
 	    _react2.default.createElement(_reactRouter.Redirect, { from: '*', to: '/anuncios' })
 	);
 
@@ -36570,9 +36574,22 @@
 	    }
 	};
 
+	var property = function property() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case actions.SET_PROPERTY:
+	            return action.property;
+	        default:
+	            return state;
+	    }
+	};
+
 	var combinedReducers = (0, _redux.combineReducers)({
 	    properties: properties,
 	    filteredProperties: filteredProperties,
+	    property: property,
 	    form: _reduxForm.reducer
 	});
 
@@ -36606,6 +36623,14 @@
 	    return {
 	        type: SET_FILTERED_PROPERTIES,
 	        filteredProperties: filteredProperties
+	    };
+	};
+
+	var SET_PROPERTY = exports.SET_PROPERTY = 'SET_PROPERTY';
+	var setProperty = exports.setProperty = function setProperty(property) {
+	    return {
+	        type: SET_PROPERTY,
+	        property: property
 	    };
 	};
 
@@ -45558,31 +45583,19 @@
 
 	var _reactRedux = __webpack_require__(544);
 
-	var _propertyList = __webpack_require__(740);
+	var _propertyCard = __webpack_require__(740);
 
-	var _propertyList2 = _interopRequireDefault(_propertyList);
+	var _propertyCard2 = _interopRequireDefault(_propertyCard);
 
-	var _http = __webpack_require__(746);
-
-	var _http2 = _interopRequireDefault(_http);
-
-	var _spotipposApi = __webpack_require__(747);
+	var _spotipposApi = __webpack_require__(745);
 
 	var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
 
+	var _http = __webpack_require__(747);
+
+	var _http2 = _interopRequireDefault(_http);
+
 	var _vrfActions = __webpack_require__(567);
-
-	var _filterBox = __webpack_require__(749);
-
-	var _filterBox2 = _interopRequireDefault(_filterBox);
-
-	var _filter = __webpack_require__(752);
-
-	var _filter2 = _interopRequireDefault(_filter);
-
-	var _lodash = __webpack_require__(751);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45592,76 +45605,63 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var AdvertisingsPage = function (_Component) {
-	    _inherits(AdvertisingsPage, _Component);
+	var AdvertisingPage = function (_Component) {
+	    _inherits(AdvertisingPage, _Component);
 
-	    function AdvertisingsPage(props) {
-	        _classCallCheck(this, AdvertisingsPage);
+	    function AdvertisingPage(props) {
+	        _classCallCheck(this, AdvertisingPage);
 
-	        return _possibleConstructorReturn(this, (AdvertisingsPage.__proto__ || Object.getPrototypeOf(AdvertisingsPage)).call(this, props));
+	        return _possibleConstructorReturn(this, (AdvertisingPage.__proto__ || Object.getPrototypeOf(AdvertisingPage)).call(this, props));
 	    }
 
-	    _createClass(AdvertisingsPage, [{
+	    _createClass(AdvertisingPage, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var _props = this.props;
-	            var properties = _props.properties;
-	            var getProperties = _props.getProperties;
-	            var setFilteredProperties = _props.setFilteredProperties;
-	            var location = _props.location;
+	            var params = _props.params;
+	            var property = _props.property;
+	            var getProperty = _props.getProperty;
 
 
-	            if (!properties.length) {
-	                getProperties().then(function (properties) {
-	                    setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
-	                });
-	            } else {
-	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
-	            }
-	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            var location = nextProps.location;
-	            var properties = nextProps.properties;
-	            var setFilteredProperties = nextProps.setFilteredProperties;
-
-
-	            if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
-	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	            if (!property || property.id != params.id) {
+	                getProperty(params.id);
 	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props2 = this.props;
-	            var filteredProperties = _props2.filteredProperties;
-	            var location = _props2.location;
+	            var property = _props2.property;
+	            var params = _props2.params;
 
+
+	            if (!property || params.id !== property.id) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    'loading'
+	                );
+	            }
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'advertisings-page' },
-	                _react2.default.createElement(_filterBox2.default, { filter: location.query }),
+	                { className: 'advertising-page-component' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'page-content' },
-	                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties })
+	                    { className: 'box' },
+	                    _react2.default.createElement(_propertyCard2.default, { property: property, showFooterBtn: false })
 	                )
 	            );
 	        }
 	    }]);
 
-	    return AdvertisingsPage;
+	    return AdvertisingPage;
 	}(_react.Component);
 
-	AdvertisingsPage.propTypes = {
-	    properties: _react.PropTypes.array.isRequired,
-	    getProperties: _react.PropTypes.func.isRequired,
-	    location: _react.PropTypes.object.isRequired,
-	    filter: _react.PropTypes.object,
-	    filteredProperties: _react.PropTypes.array.isRequired,
-	    setFilteredProperties: _react.PropTypes.func.isRequired
+	AdvertisingPage.propTypes = {
+	    property: _react.PropTypes.object,
+	    params: _react.PropTypes.object,
+	    getProperty: _react.PropTypes.func.isRequired
 	};
 
 	function getRandomImg(id) {
@@ -45669,26 +45669,21 @@
 	}
 
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return { properties: state.properties, filteredProperties: state.filteredProperties, filter: state.form.filter && state.form.filter.values };
+	    return { property: state.property };
 	}, function (dispatch) {
 	    return {
-	        getProperties: function getProperties() {
+	        getProperty: function getProperty(id) {
+
 	            var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
 
-	            return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
-	                var properties = _lodash2.default.take(response.properties, 20);
-	                dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
-	                    property.img = getRandomImg(property.id);
-	                    return property;
-	                })));
-	                return properties;
+	            return spotipposApi.get('properties', id).then(function (property) {
+	                property.img = getRandomImg(id);
+	                dispatch((0, _vrfActions.setProperty)(property));
+	                return property;
 	            });
-	        },
-	        setFilteredProperties: function setFilteredProperties(filteredProperties) {
-	            dispatch((0, _vrfActions.setFilteredProperties)(filteredProperties));
 	        }
 	    };
-	})(AdvertisingsPage);
+	})(AdvertisingPage);
 
 /***/ },
 /* 740 */
@@ -45706,75 +45701,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _propertyCard = __webpack_require__(741);
-
-	var _propertyCard2 = _interopRequireDefault(_propertyCard);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var PropertyList = function (_Component) {
-	    _inherits(PropertyList, _Component);
-
-	    function PropertyList(props) {
-	        _classCallCheck(this, PropertyList);
-
-	        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
-	    }
-
-	    _createClass(PropertyList, [{
-	        key: 'render',
-	        value: function render() {
-	            var properties = this.props.properties;
-
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'property-list-component' },
-	                properties.map(function (property) {
-	                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property });
-	                })
-	            );
-	        }
-	    }]);
-
-	    return PropertyList;
-	}(_react.Component);
-
-	PropertyList.propTypes = {
-	    properties: _react.PropTypes.array.isRequired
-	};
-
-	exports.default = PropertyList;
-
-/***/ },
-/* 741 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(475);
-
-	var _react2 = _interopRequireDefault(_react);
-
 	var _reactRouter = __webpack_require__(481);
 
-	var _footerInfo = __webpack_require__(742);
+	var _footerInfo = __webpack_require__(741);
 
 	var _footerInfo2 = _interopRequireDefault(_footerInfo);
 
-	var _currencyFormatter = __webpack_require__(743);
+	var _currencyFormatter = __webpack_require__(742);
 
 	var _currencyFormatter2 = _interopRequireDefault(_currencyFormatter);
 
@@ -45803,7 +45736,9 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var property = this.props.property;
+	            var _props = this.props;
+	            var property = _props.property;
+	            var showFooterBtn = _props.showFooterBtn;
 
 
 	            return _react2.default.createElement(
@@ -45828,7 +45763,7 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            { className: 'id' },
-	                            'ID. ',
+	                            'ID.',
 	                            property.id
 	                        ),
 	                        _react2.default.createElement(
@@ -45865,11 +45800,11 @@
 	                            ' Banheiro',
 	                            parseInt(property.baths) === 1 ? '' : 's'
 	                        ),
-	                        _react2.default.createElement(
+	                        showFooterBtn ? _react2.default.createElement(
 	                            _reactRouter.Link,
 	                            { to: '/anuncio/' + property.id },
 	                            'Visualizar anúncio'
-	                        )
+	                        ) : null
 	                    )
 	                )
 	            );
@@ -45880,13 +45815,14 @@
 	}(_react.Component);
 
 	PropertyCard.propTypes = {
-	    property: _react.PropTypes.object.isRequired
+	    property: _react.PropTypes.object.isRequired,
+	    showFooterBtn: _react.PropTypes.bool.isRequired
 	};
 
 	exports.default = PropertyCard;
 
 /***/ },
-/* 742 */
+/* 741 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45954,11 +45890,11 @@
 	exports.default = FooterInfo;
 
 /***/ },
-/* 743 */
+/* 742 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var currencies = __webpack_require__(744)
-	var accounting = __webpack_require__(745)
+	var currencies = __webpack_require__(743)
+	var accounting = __webpack_require__(744)
 	/*
 	  This polyfill intends to emulate the Array.prototy.find() method
 	  for browsers who don't support it yet.
@@ -46049,7 +45985,7 @@
 
 
 /***/ },
-/* 744 */
+/* 743 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -47497,7 +47433,7 @@
 
 
 /***/ },
-/* 745 */
+/* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -47916,7 +47852,69 @@
 
 
 /***/ },
+/* 745 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _constants = __webpack_require__(746);
+
+	var constants = _interopRequireWildcard(_constants);
+
+	var _http = __webpack_require__(747);
+
+	var _http2 = _interopRequireDefault(_http);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var SpotipposApi = function () {
+	    function SpotipposApi(http) {
+	        _classCallCheck(this, SpotipposApi);
+
+	        this.host = constants.spotipposApiHost;
+	        this.http = http;
+	    }
+
+	    _createClass(SpotipposApi, [{
+	        key: 'get',
+	        value: function get(resource, id) {
+	            return this.http.get(this.host + '/' + resource + '/' + id);
+	        }
+	    }, {
+	        key: 'list',
+	        value: function list(resource, query) {
+	            return this.http.get(this.host + '/' + resource, query);
+	        }
+	    }]);
+
+	    return SpotipposApi;
+	}();
+
+	exports.default = SpotipposApi;
+
+/***/ },
 /* 746 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var spotipposApiHost = exports.spotipposApiHost = 'http://spotippos.vivareal.com';
+
+/***/ },
+/* 747 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -47989,7 +47987,7 @@
 	exports.default = Http;
 
 /***/ },
-/* 747 */
+/* 748 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48000,55 +47998,143 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _constants = __webpack_require__(748);
+	var _react = __webpack_require__(475);
 
-	var constants = _interopRequireWildcard(_constants);
+	var _react2 = _interopRequireDefault(_react);
 
-	var _http = __webpack_require__(746);
+	var _reactRedux = __webpack_require__(544);
+
+	var _propertyList = __webpack_require__(749);
+
+	var _propertyList2 = _interopRequireDefault(_propertyList);
+
+	var _http = __webpack_require__(747);
 
 	var _http2 = _interopRequireDefault(_http);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _spotipposApi = __webpack_require__(745);
 
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
+
+	var _vrfActions = __webpack_require__(567);
+
+	var _filterBox = __webpack_require__(750);
+
+	var _filterBox2 = _interopRequireDefault(_filterBox);
+
+	var _filter = __webpack_require__(753);
+
+	var _filter2 = _interopRequireDefault(_filter);
+
+	var _lodash = __webpack_require__(752);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var SpotipposApi = function () {
-	    function SpotipposApi(http) {
-	        _classCallCheck(this, SpotipposApi);
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        this.host = constants.spotipposApiHost;
-	        this.http = http;
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AdvertisingsPage = function (_Component) {
+	    _inherits(AdvertisingsPage, _Component);
+
+	    function AdvertisingsPage(props) {
+	        _classCallCheck(this, AdvertisingsPage);
+
+	        return _possibleConstructorReturn(this, (AdvertisingsPage.__proto__ || Object.getPrototypeOf(AdvertisingsPage)).call(this, props));
 	    }
 
-	    _createClass(SpotipposApi, [{
-	        key: 'get',
-	        value: function get(resource, id) {
-	            return this.http.get(this.host + '/' + resource + '/' + id);
+	    _createClass(AdvertisingsPage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _props = this.props;
+	            var properties = _props.properties;
+	            var getProperties = _props.getProperties;
+	            var setFilteredProperties = _props.setFilteredProperties;
+	            var location = _props.location;
+
+
+	            if (!properties.length) {
+	                getProperties().then(function (properties) {
+	                    setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	                });
+	            } else {
+	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	            }
 	        }
 	    }, {
-	        key: 'list',
-	        value: function list(resource, query) {
-	            return this.http.get(this.host + '/' + resource, query);
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            var location = nextProps.location;
+	            var properties = nextProps.properties;
+	            var setFilteredProperties = nextProps.setFilteredProperties;
+
+
+	            if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
+	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props2 = this.props;
+	            var filteredProperties = _props2.filteredProperties;
+	            var location = _props2.location;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'advertisings-page' },
+	                _react2.default.createElement(_filterBox2.default, { filter: location.query }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'page-content' },
+	                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties })
+	                )
+	            );
 	        }
 	    }]);
 
-	    return SpotipposApi;
-	}();
+	    return AdvertisingsPage;
+	}(_react.Component);
 
-	exports.default = SpotipposApi;
+	AdvertisingsPage.propTypes = {
+	    properties: _react.PropTypes.array.isRequired,
+	    getProperties: _react.PropTypes.func.isRequired,
+	    location: _react.PropTypes.object.isRequired,
+	    filter: _react.PropTypes.object,
+	    filteredProperties: _react.PropTypes.array.isRequired,
+	    setFilteredProperties: _react.PropTypes.func.isRequired
+	};
 
-/***/ },
-/* 748 */
-/***/ function(module, exports) {
+	function getRandomImg(id) {
+	    return '/imgs/property_placeholder_' + id % 5 + '.jpg';
+	}
 
-	'use strict';
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return { properties: state.properties, filteredProperties: state.filteredProperties, filter: state.form.filter && state.form.filter.values };
+	}, function (dispatch) {
+	    return {
+	        getProperties: function getProperties() {
+	            var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var spotipposApiHost = exports.spotipposApiHost = 'http://spotippos.vivareal.com';
+	            return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
+	                var properties = _lodash2.default.take(response.properties, 20);
+	                dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
+	                    property.img = getRandomImg(property.id);
+	                    return property;
+	                })));
+	                return properties;
+	            });
+	        },
+	        setFilteredProperties: function setFilteredProperties(filteredProperties) {
+	            dispatch((0, _vrfActions.setFilteredProperties)(filteredProperties));
+	        }
+	    };
+	})(AdvertisingsPage);
 
 /***/ },
 /* 749 */
@@ -48066,11 +48152,73 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _filterForm = __webpack_require__(750);
+	var _propertyCard = __webpack_require__(740);
+
+	var _propertyCard2 = _interopRequireDefault(_propertyCard);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropertyList = function (_Component) {
+	    _inherits(PropertyList, _Component);
+
+	    function PropertyList(props) {
+	        _classCallCheck(this, PropertyList);
+
+	        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
+	    }
+
+	    _createClass(PropertyList, [{
+	        key: 'render',
+	        value: function render() {
+	            var properties = this.props.properties;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'property-list-component' },
+	                properties.map(function (property) {
+	                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property, showFooterBtn: true });
+	                })
+	            );
+	        }
+	    }]);
+
+	    return PropertyList;
+	}(_react.Component);
+
+	PropertyList.propTypes = {
+	    properties: _react.PropTypes.array.isRequired
+	};
+
+	exports.default = PropertyList;
+
+/***/ },
+/* 750 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(475);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _filterForm = __webpack_require__(751);
 
 	var _filterForm2 = _interopRequireDefault(_filterForm);
 
-	var _lodash = __webpack_require__(751);
+	var _lodash = __webpack_require__(752);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -48137,7 +48285,7 @@
 	exports.default = FilterBox;
 
 /***/ },
-/* 750 */
+/* 751 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48270,7 +48418,7 @@
 	})(FilterForm);
 
 /***/ },
-/* 751 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -65010,7 +65158,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(666)(module)))
 
 /***/ },
-/* 752 */
+/* 753 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65068,7 +65216,7 @@
 	exports.default = new FilterSerice();
 
 /***/ },
-/* 753 */
+/* 754 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

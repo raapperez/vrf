@@ -18,3 +18,11 @@ var setFilteredProperties = exports.setFilteredProperties = function setFiltered
         filteredProperties: filteredProperties
     };
 };
+
+var SET_PROPERTY = exports.SET_PROPERTY = 'SET_PROPERTY';
+var setProperty = exports.setProperty = function setProperty(property) {
+    return {
+        type: SET_PROPERTY,
+        property: property
+    };
+};

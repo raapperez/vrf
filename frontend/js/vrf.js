@@ -19,6 +19,10 @@ var _spotippos = require('./spotippos');
 
 var _spotippos2 = _interopRequireDefault(_spotippos);
 
+var _advertising = require('./pages/advertising');
+
+var _advertising2 = _interopRequireDefault(_advertising);
+
 var _advertisings = require('./pages/advertisings');
 
 var _advertisings2 = _interopRequireDefault(_advertisings);
@@ -34,7 +38,7 @@ var routes = exports.routes = _react2.default.createElement(
     { path: '', component: _spotippos2.default },
     _react2.default.createElement(_reactRouter.Route, { path: '/anuncios', component: _advertisings2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/novo-anuncio', component: _noPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/anuncio/:id', component: _noPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/anuncio/:id', component: _advertising2.default }),
     _react2.default.createElement(_reactRouter.Redirect, { from: '*', to: '/anuncios' })
 );
 

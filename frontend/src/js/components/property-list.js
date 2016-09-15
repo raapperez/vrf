@@ -17,7 +17,7 @@ class PropertyList extends Component {
         return (
             <div className="property-list-component">
                 {properties.map(property => (
-                    <PropertyCard key={property.id} property={property} />
+                    <PropertyCard key={property.id} property={property} showFooterBtn={true} />
                 )) }
             </div>
         );

@@ -39,9 +39,22 @@ var filteredProperties = function filteredProperties() {
     }
 };
 
+var property = function property() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case actions.SET_PROPERTY:
+            return action.property;
+        default:
+            return state;
+    }
+};
+
 var combinedReducers = (0, _redux.combineReducers)({
     properties: properties,
     filteredProperties: filteredProperties,
+    property: property,
     form: _reduxForm.reducer
 });
 

@@ -15,17 +15,17 @@ class PropertyCard extends Component {
     }
 
     render() {
-        const {property} = this.props;
+        const {property, showFooterBtn} = this.props;
 
         return (
             <div className="property-card-component">
                 <div className="left-box">
                     <img className="no-select" src={property.img} />
-                    <span className="price">{this.formatPrice(property.price)}</span>
+                    <span className="price">{this.formatPrice(property.price) }</span>
                 </div>
                 <div className="right-box">
                     <div className="content">
-                        <span className="id">ID. {property.id}</span>
+                        <span className="id">ID.{property.id}</span>
                         <h2 className="title">{property.title}</h2>
                         <p className="description">{property.description}</p>
                     </div>
@@ -40,7 +40,11 @@ class PropertyCard extends Component {
                         <FooterInfo imgUrl="/imgs/ic-card-bathroom.svg">
                             {property.baths} Banheiro{parseInt(property.baths) === 1 ? '' : 's'}
                         </FooterInfo>
-                        <Link to={`/anuncio/${property.id}`}>Visualizar anúncio</Link>
+                        {showFooterBtn ?
+                            <Link to={`/anuncio/${property.id}`}>Visualizar anúncio</Link>
+                            : null
+                        }
+
                     </div>
                 </div>
 
@@ -51,7 +55,8 @@ class PropertyCard extends Component {
 }
 
 PropertyCard.propTypes = {
-    property: PropTypes.object.isRequired
+    property: PropTypes.object.isRequired,
+    showFooterBtn: PropTypes.bool.isRequired
 };
 
 export default PropertyCard;

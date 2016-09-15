@@ -45,7 +45,9 @@ var PropertyCard = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var property = this.props.property;
+            var _props = this.props;
+            var property = _props.property;
+            var showFooterBtn = _props.showFooterBtn;
 
 
             return _react2.default.createElement(
@@ -70,7 +72,7 @@ var PropertyCard = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             { className: 'id' },
-                            'ID. ',
+                            'ID.',
                             property.id
                         ),
                         _react2.default.createElement(
@@ -107,11 +109,11 @@ var PropertyCard = function (_Component) {
                             ' Banheiro',
                             parseInt(property.baths) === 1 ? '' : 's'
                         ),
-                        _react2.default.createElement(
+                        showFooterBtn ? _react2.default.createElement(
                             _reactRouter.Link,
                             { to: '/anuncio/' + property.id },
                             'Visualizar anúncio'
-                        )
+                        ) : null
                     )
                 )
             );
@@ -122,7 +124,8 @@ var PropertyCard = function (_Component) {
 }(_react.Component);
 
 PropertyCard.propTypes = {
-    property: _react.PropTypes.object.isRequired
+    property: _react.PropTypes.object.isRequired,
+    showFooterBtn: _react.PropTypes.bool.isRequired
 };
 
 exports.default = PropertyCard;

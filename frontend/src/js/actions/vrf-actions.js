@@ -11,3 +11,10 @@ export const setFilteredProperties = filteredProperties => ({
     type: SET_FILTERED_PROPERTIES,
     filteredProperties
 });
+
+
+export const SET_PROPERTY = 'SET_PROPERTY';
+export const setProperty = property => ({
+    type: SET_PROPERTY,
+    property
+});
