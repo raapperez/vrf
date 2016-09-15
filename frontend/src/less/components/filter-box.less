@@ -6,6 +6,12 @@
     background-color: @filterBoxColor;
     margin: 16px 0 0 18px;
 
+    @media (max-width: @smallScreen) {
+        min-width: inherit;
+        max-width: inherit;
+        margin: 0 8px 0 8px;
+    }
+
     .title {
         margin: 13px 13px 0 13px;
         font-size: 16px;
@@ -15,11 +21,26 @@
         line-height: 1.25;
         color: @brownishGreyColor;
         display: block;
+
+        @media (max-width: @smallScreen) {
+            padding-top: 13px;
+        }
     }
 
     .form {
         input[type=text], input[type=number] {
             width: 95px;
+        }
+    }
+
+    .row {
+        @media (max-width: @smallScreen) {
+            justify-content: center;
+            padding: 8px 0;
+
+            & > div:not(:first-child) {
+                margin-left: 13px;
+            }
         }
     }
 }
