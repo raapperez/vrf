@@ -7,6 +7,7 @@ import SpotipposApi from '../services/spotippos-api';
 import Http from '../services/http';
 import {setProperty} from '../actions/vrf-actions';
 import Loading from '../components/loading';
+import _ from 'lodash';
 
 class AdvertisingPage extends Component {
 
@@ -63,6 +64,9 @@ export default connect(
             const spotipposApi = new SpotipposApi(new Http(window.fetch));
 
             return spotipposApi.get('properties', id).then(property => {
+                if(_.isEmpty(property)) {
+                    window.location.reload(true); 
+                }
                 property.img = getRandomImg(id);
                 dispatch(setProperty(property));
                 return property;

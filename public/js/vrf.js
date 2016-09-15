@@ -45601,6 +45601,10 @@
 
 	var _loading2 = _interopRequireDefault(_loading);
 
+	var _lodash = __webpack_require__(753);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45674,6 +45678,9 @@
 	            var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
 
 	            return spotipposApi.get('properties', id).then(function (property) {
+	                if (_lodash2.default.isEmpty(property)) {
+	                    window.location.reload(true);
+	                }
 	                property.img = getRandomImg(id);
 	                dispatch((0, _vrfActions.setProperty)(property));
 	                return property;
