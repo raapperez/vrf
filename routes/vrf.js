@@ -15,6 +15,7 @@ const filterService = require('../frontend/js/services/filter').default;
 
 const spotipposApi = new SpotipposApi(new Http(fetch));
 
+// TODO: remove when property comes with img url
 function getRandomImg(id) {
   return `/imgs/property_placeholder_${id % 5}.jpg`;
 }

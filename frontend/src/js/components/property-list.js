@@ -3,6 +3,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import PropertyCard from './property-card';
+import Loading from './loading';
 
 class PropertyList extends Component {
 
@@ -12,7 +13,25 @@ class PropertyList extends Component {
 
     render() {
 
-        const {properties} = this.props;
+        const {properties, doneLoading} = this.props;
+
+        if (!doneLoading) {
+            return (
+                <div className="property-list-component">
+                    <Loading />
+                </div>
+            );
+        }
+
+        if (!properties.length) {
+            return (
+                <div className="property-list-component">
+                    <p className="info">Não foram encontrados anúncios para sua busca.</p>
+                </div>
+            );
+        }
+
+        
 
         return (
             <div className="property-list-component">
@@ -25,7 +44,8 @@ class PropertyList extends Component {
 }
 
 PropertyList.propTypes = {
-    properties: PropTypes.array.isRequired
+    properties: PropTypes.array.isRequired,
+    doneLoading: PropTypes.bool.isRequired
 };
 
 export default PropertyList;

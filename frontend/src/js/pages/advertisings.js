@@ -37,13 +37,13 @@ class AdvertisingsPage extends Component {
     }
 
     render() {
-        const {filteredProperties, location} = this.props;
+        const {properties, filteredProperties, location} = this.props;
 
         return (
             <div className="advertisings-page">
                 <FilterBox filter={location.query} />
                 <div className="page-content">
-                    <PropertyList properties={filteredProperties} />
+                    <PropertyList properties={filteredProperties} doneLoading={!!properties.length || !!filteredProperties.length}/>
                 </div>
             </div>
         );

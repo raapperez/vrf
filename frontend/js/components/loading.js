@@ -10,14 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propertyCard = require('./property-card');
-
-var _propertyCard2 = _interopRequireDefault(_propertyCard);
-
-var _loading = require('./loading');
-
-var _loading2 = _interopRequireDefault(_loading);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26,59 +18,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PropertyList = function (_Component) {
-    _inherits(PropertyList, _Component);
+var Loading = function (_Component) {
+    _inherits(Loading, _Component);
 
-    function PropertyList(props) {
-        _classCallCheck(this, PropertyList);
+    function Loading() {
+        _classCallCheck(this, Loading);
 
-        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
+        return _possibleConstructorReturn(this, (Loading.__proto__ || Object.getPrototypeOf(Loading)).apply(this, arguments));
     }
 
-    _createClass(PropertyList, [{
+    _createClass(Loading, [{
         key: 'render',
         value: function render() {
-            var _props = this.props;
-            var properties = _props.properties;
-            var doneLoading = _props.doneLoading;
-
-
-            if (!doneLoading) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'property-list-component' },
-                    _react2.default.createElement(_loading2.default, null)
-                );
-            }
-
-            if (!properties.length) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'property-list-component' },
-                    _react2.default.createElement(
-                        'p',
-                        { className: 'info' },
-                        'Não foram encontrados anúncios para sua busca.'
-                    )
-                );
-            }
-
             return _react2.default.createElement(
                 'div',
-                { className: 'property-list-component' },
-                properties.map(function (property) {
-                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property, showFooterBtn: true });
-                })
+                { className: 'loading-component' },
+                'Carregando...'
             );
         }
     }]);
 
-    return PropertyList;
+    return Loading;
 }(_react.Component);
 
-PropertyList.propTypes = {
-    properties: _react.PropTypes.array.isRequired,
-    doneLoading: _react.PropTypes.bool.isRequired
-};
-
-exports.default = PropertyList;
+exports.default = Loading;

@@ -28790,11 +28790,11 @@
 
 	var _advertising2 = _interopRequireDefault(_advertising);
 
-	var _advertisings = __webpack_require__(748);
+	var _advertisings = __webpack_require__(749);
 
 	var _advertisings2 = _interopRequireDefault(_advertisings);
 
-	var _noPage = __webpack_require__(754);
+	var _noPage = __webpack_require__(755);
 
 	var _noPage2 = _interopRequireDefault(_noPage);
 
@@ -45597,6 +45597,10 @@
 
 	var _vrfActions = __webpack_require__(567);
 
+	var _loading = __webpack_require__(748);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45635,21 +45639,13 @@
 	            var params = _props2.params;
 
 
-	            if (!property || params.id !== property.id) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'loading'
-	                );
-	            }
-
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'advertising-page-component' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'box' },
-	                    _react2.default.createElement(_propertyCard2.default, { property: property, showFooterBtn: false })
+	                    !property || params.id !== property.id ? _react2.default.createElement(_loading2.default, null) : _react2.default.createElement(_propertyCard2.default, { property: property, showFooterBtn: false })
 	                )
 	            );
 	        }
@@ -45664,6 +45660,7 @@
 	    getProperty: _react.PropTypes.func.isRequired
 	};
 
+	// TODO: remove when property comes with img url
 	function getRandomImg(id) {
 	    return '/imgs/property_placeholder_' + id % 5 + '.jpg';
 	}
@@ -48002,9 +47999,58 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Loading = function (_Component) {
+	    _inherits(Loading, _Component);
+
+	    function Loading() {
+	        _classCallCheck(this, Loading);
+
+	        return _possibleConstructorReturn(this, (Loading.__proto__ || Object.getPrototypeOf(Loading)).apply(this, arguments));
+	    }
+
+	    _createClass(Loading, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'loading-component' },
+	                'Carregando...'
+	            );
+	        }
+	    }]);
+
+	    return Loading;
+	}(_react.Component);
+
+	exports.default = Loading;
+
+/***/ },
+/* 749 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(475);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRedux = __webpack_require__(544);
 
-	var _propertyList = __webpack_require__(749);
+	var _propertyList = __webpack_require__(750);
 
 	var _propertyList2 = _interopRequireDefault(_propertyList);
 
@@ -48018,15 +48064,15 @@
 
 	var _vrfActions = __webpack_require__(567);
 
-	var _filterBox = __webpack_require__(750);
+	var _filterBox = __webpack_require__(751);
 
 	var _filterBox2 = _interopRequireDefault(_filterBox);
 
-	var _filter = __webpack_require__(753);
+	var _filter = __webpack_require__(754);
 
 	var _filter2 = _interopRequireDefault(_filter);
 
-	var _lodash = __webpack_require__(752);
+	var _lodash = __webpack_require__(753);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -48081,6 +48127,7 @@
 	        key: 'render',
 	        value: function render() {
 	            var _props2 = this.props;
+	            var properties = _props2.properties;
 	            var filteredProperties = _props2.filteredProperties;
 	            var location = _props2.location;
 
@@ -48092,7 +48139,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'page-content' },
-	                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties })
+	                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties, doneLoading: !!properties.length || !!filteredProperties.length })
 	                )
 	            );
 	        }
@@ -48137,7 +48184,7 @@
 	})(AdvertisingsPage);
 
 /***/ },
-/* 749 */
+/* 750 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48155,6 +48202,10 @@
 	var _propertyCard = __webpack_require__(740);
 
 	var _propertyCard2 = _interopRequireDefault(_propertyCard);
+
+	var _loading = __webpack_require__(748);
+
+	var _loading2 = _interopRequireDefault(_loading);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48176,8 +48227,30 @@
 	    _createClass(PropertyList, [{
 	        key: 'render',
 	        value: function render() {
-	            var properties = this.props.properties;
+	            var _props = this.props;
+	            var properties = _props.properties;
+	            var doneLoading = _props.doneLoading;
 
+
+	            if (!doneLoading) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'property-list-component' },
+	                    _react2.default.createElement(_loading2.default, null)
+	                );
+	            }
+
+	            if (!properties.length) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'property-list-component' },
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'info' },
+	                        'Não foram encontrados anúncios para sua busca.'
+	                    )
+	                );
+	            }
 
 	            return _react2.default.createElement(
 	                'div',
@@ -48193,13 +48266,14 @@
 	}(_react.Component);
 
 	PropertyList.propTypes = {
-	    properties: _react.PropTypes.array.isRequired
+	    properties: _react.PropTypes.array.isRequired,
+	    doneLoading: _react.PropTypes.bool.isRequired
 	};
 
 	exports.default = PropertyList;
 
 /***/ },
-/* 750 */
+/* 751 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48214,11 +48288,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _filterForm = __webpack_require__(751);
+	var _filterForm = __webpack_require__(752);
 
 	var _filterForm2 = _interopRequireDefault(_filterForm);
 
-	var _lodash = __webpack_require__(752);
+	var _lodash = __webpack_require__(753);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -48285,7 +48359,7 @@
 	exports.default = FilterBox;
 
 /***/ },
-/* 751 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48418,7 +48492,7 @@
 	})(FilterForm);
 
 /***/ },
-/* 752 */
+/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -65158,7 +65232,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(666)(module)))
 
 /***/ },
-/* 753 */
+/* 754 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65216,7 +65290,7 @@
 	exports.default = new FilterSerice();
 
 /***/ },
-/* 754 */
+/* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

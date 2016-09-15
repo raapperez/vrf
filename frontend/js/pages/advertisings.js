@@ -89,6 +89,7 @@ var AdvertisingsPage = function (_Component) {
         key: 'render',
         value: function render() {
             var _props2 = this.props;
+            var properties = _props2.properties;
             var filteredProperties = _props2.filteredProperties;
             var location = _props2.location;
 
@@ -100,7 +101,7 @@ var AdvertisingsPage = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'page-content' },
-                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties })
+                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties, doneLoading: !!properties.length || !!filteredProperties.length })
                 )
             );
         }

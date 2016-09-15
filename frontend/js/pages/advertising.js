@@ -26,6 +26,10 @@ var _http2 = _interopRequireDefault(_http);
 
 var _vrfActions = require('../actions/vrf-actions');
 
+var _loading = require('../components/loading');
+
+var _loading2 = _interopRequireDefault(_loading);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64,21 +68,13 @@ var AdvertisingPage = function (_Component) {
             var params = _props2.params;
 
 
-            if (!property || params.id !== property.id) {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    'loading'
-                );
-            }
-
             return _react2.default.createElement(
                 'div',
                 { className: 'advertising-page-component' },
                 _react2.default.createElement(
                     'div',
                     { className: 'box' },
-                    _react2.default.createElement(_propertyCard2.default, { property: property, showFooterBtn: false })
+                    !property || params.id !== property.id ? _react2.default.createElement(_loading2.default, null) : _react2.default.createElement(_propertyCard2.default, { property: property, showFooterBtn: false })
                 )
             );
         }
@@ -93,6 +89,7 @@ AdvertisingPage.propTypes = {
     getProperty: _react.PropTypes.func.isRequired
 };
 
+// TODO: remove when property comes with img url
 function getRandomImg(id) {
     return '/imgs/property_placeholder_' + id % 5 + '.jpg';
 }
