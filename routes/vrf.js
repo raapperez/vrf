@@ -31,6 +31,13 @@ function getAdvertisingsInitialState(req) {
   });
 }
 
+function getAdvertisingInitialState(req) {
+  return spotipposApi.get('properties', req.params.id).then(property => {
+    property.img = getRandomImg(property.id);
+    return { property };
+  });
+}
+
 function handleRequest(req, res, next, getInitialState) {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -77,6 +84,9 @@ router.get('/anuncios', (req, res, next) => {
   handleRequest(req, res, next, getAdvertisingsInitialState);
 });
 
+router.get('/anuncio/:id', (req, res, next) => {
+  handleRequest(req, res, next, getAdvertisingInitialState);
+});
 
 router.get('*', (req, res, next) => {
   handleRequest(req, res, next);
