@@ -9,6 +9,11 @@
     top: 0;
     left: 0;
     z-index: 1;
+    overflow: hidden;
+
+    @media (max-width: @smallScreen) {
+        padding-left: 91px;
+    }
 
     .logo-box {
         background-color: @azureColor;
@@ -21,6 +26,10 @@
         justify-content: center;
         align-items: center;
         .no-select();
+
+        @media (max-width: @smallScreen) {
+            width: 61px;
+        }
         
 
         .logo {
@@ -34,6 +43,10 @@
         font-size: 24px;
         font-weight: bold;
         font-style: normal;
-        font-stretch: condensed;
+        font-stretch: condensed;        
+
+        @media (max-width: @smallScreen) {
+            font-size: 18px;
+        }
     }
 }

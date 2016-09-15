@@ -84,6 +84,12 @@ var PropertyCard = function (_Component) {
                             'p',
                             { className: 'description' },
                             property.description
+                        ),
+                        _react2.default.createElement('img', { className: 'no-select img', src: property.img }),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'price' },
+                            this.formatPrice(property.price)
                         )
                     ),
                     _react2.default.createElement(
@@ -109,7 +115,7 @@ var PropertyCard = function (_Component) {
                             ' Banheiro',
                             parseInt(property.baths) === 1 ? '' : 's'
                         ),
-                        showFooterBtn ? _react2.default.createElement(
+                        showFooterBtn || true ? _react2.default.createElement(
                             _reactRouter.Link,
                             { to: '/anuncio/' + property.id },
                             'Visualizar anúncio'

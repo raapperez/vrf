@@ -4,6 +4,11 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   display: flex;
   border-radius: 2px;
+  position: relative;
+
+  @media (max-width: @smallScreen) {
+    height: auto;
+  }
 
   &:not(:last-child) {
     margin-bottom: 18px;    
@@ -14,9 +19,23 @@
     width: 298px;
     position: relative;
 
+    @media (max-width: @largeScreen) {
+      position: absolute;
+      width: auto;
+    }
+
+    @media (max-width: @smallScreen) {
+      display: none;
+    }
+
     img {
       border-top-left-radius: 2px;
       border-bottom-left-radius: 2px;
+
+      @media (max-width: @largeScreen) {
+        height: 174px;
+        width: auto;
+      }
     }
 
     .price {
@@ -47,6 +66,16 @@
       flex-shrink: 1;
       padding: 12px 33px 18px 17.8px;
       max-height: 174px;
+
+      @media (max-width: @largeScreen) {
+        padding-left: 250px;
+      }
+
+      @media (max-width: @smallScreen) {
+        padding-left: 8px;
+        padding-right: 8px;
+        max-height: inherit;
+      }
       
       .id {        
         border-radius: 2px;
@@ -75,6 +104,10 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+
+        @media (max-width: @smallScreen) {
+          line-height: 1.1;
+        }
       }
 
       .description {
@@ -88,6 +121,35 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;  
+
+        @media (max-width: @smallScreen) {
+          line-height: 1.1;
+        }
+      }
+
+      .img {
+          width: 100%;
+          margin-top: 10px;
+
+          @media (min-width: @smallScreen) {
+            display: none;
+          }
+      }
+
+      .price {
+        position: absolute;
+        right: 17px;
+        top: 12px;
+        font-size: 20px;
+        font-family: 'OpenSans', sans-serif;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.39;
+        color: @greyishBrownColor;;
+
+        @media (min-width: @smallScreen) {
+          display: none;
+        }
       }
     }
 
@@ -98,6 +160,10 @@
       border-bottom-right-radius: 2px;
       position: relative;
       padding-left: 17.8px;
+
+      @media (max-width: @smallScreen) {
+        padding-left: 8px;
+      }
 
       a {
         position: absolute;
@@ -116,9 +182,17 @@
         text-transform: uppercase;
         padding: 8px;
         
+        @media (max-width: @smallScreen) {
+          text-indent: -9999px;
+          background: url("/imgs/link.svg") @azureColor no-repeat center;
+          background-size: 40%;
+          width: 50px;
+        }
+
         &:active {
             background-color: @twilightBlueColor;
         }
+
         
       }
     }

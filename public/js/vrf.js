@@ -28790,7 +28790,7 @@
 
 	var _advertising2 = _interopRequireDefault(_advertising);
 
-	var _advertisings = __webpack_require__(749);
+	var _advertisings = __webpack_require__(750);
 
 	var _advertisings2 = _interopRequireDefault(_advertisings);
 
@@ -45601,7 +45601,7 @@
 
 	var _loading2 = _interopRequireDefault(_loading);
 
-	var _lodash = __webpack_require__(753);
+	var _lodash = __webpack_require__(749);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -45779,6 +45779,12 @@
 	                            'p',
 	                            { className: 'description' },
 	                            property.description
+	                        ),
+	                        _react2.default.createElement('img', { className: 'no-select img', src: property.img }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'price' },
+	                            this.formatPrice(property.price)
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -45804,7 +45810,7 @@
 	                            ' Banheiro',
 	                            parseInt(property.baths) === 1 ? '' : 's'
 	                        ),
-	                        showFooterBtn ? _react2.default.createElement(
+	                        showFooterBtn || true ? _react2.default.createElement(
 	                            _reactRouter.Link,
 	                            { to: '/anuncio/' + property.id },
 	                            'Visualizar anúncio'
@@ -48041,543 +48047,6 @@
 
 /***/ },
 /* 749 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(475);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(544);
-
-	var _propertyList = __webpack_require__(750);
-
-	var _propertyList2 = _interopRequireDefault(_propertyList);
-
-	var _http = __webpack_require__(747);
-
-	var _http2 = _interopRequireDefault(_http);
-
-	var _spotipposApi = __webpack_require__(745);
-
-	var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
-
-	var _vrfActions = __webpack_require__(567);
-
-	var _filterBox = __webpack_require__(751);
-
-	var _filterBox2 = _interopRequireDefault(_filterBox);
-
-	var _filter = __webpack_require__(755);
-
-	var _filter2 = _interopRequireDefault(_filter);
-
-	var _lodash = __webpack_require__(753);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AdvertisingsPage = function (_Component) {
-	    _inherits(AdvertisingsPage, _Component);
-
-	    function AdvertisingsPage(props) {
-	        _classCallCheck(this, AdvertisingsPage);
-
-	        return _possibleConstructorReturn(this, (AdvertisingsPage.__proto__ || Object.getPrototypeOf(AdvertisingsPage)).call(this, props));
-	    }
-
-	    _createClass(AdvertisingsPage, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _props = this.props;
-	            var properties = _props.properties;
-	            var getProperties = _props.getProperties;
-	            var setFilteredProperties = _props.setFilteredProperties;
-	            var location = _props.location;
-
-
-	            if (!properties.length) {
-	                getProperties().then(function (properties) {
-	                    setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
-	                });
-	            } else {
-	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
-	            }
-	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            var location = nextProps.location;
-	            var properties = nextProps.properties;
-	            var setFilteredProperties = nextProps.setFilteredProperties;
-
-
-	            if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
-	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props2 = this.props;
-	            var properties = _props2.properties;
-	            var filteredProperties = _props2.filteredProperties;
-	            var location = _props2.location;
-
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'advertisings-page' },
-	                _react2.default.createElement(_filterBox2.default, { filter: location.query }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'page-content' },
-	                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties, doneLoading: !!properties.length || !!filteredProperties.length })
-	                )
-	            );
-	        }
-	    }]);
-
-	    return AdvertisingsPage;
-	}(_react.Component);
-
-	AdvertisingsPage.propTypes = {
-	    properties: _react.PropTypes.array.isRequired,
-	    getProperties: _react.PropTypes.func.isRequired,
-	    location: _react.PropTypes.object.isRequired,
-	    filter: _react.PropTypes.object,
-	    filteredProperties: _react.PropTypes.array.isRequired,
-	    setFilteredProperties: _react.PropTypes.func.isRequired
-	};
-
-	function getRandomImg(id) {
-	    return '/imgs/property_placeholder_' + id % 5 + '.jpg';
-	}
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return { properties: state.properties, filteredProperties: state.filteredProperties, filter: state.form.filter && state.form.filter.values };
-	}, function (dispatch) {
-	    return {
-	        getProperties: function getProperties() {
-	            var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
-
-	            return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
-	                var properties = _lodash2.default.take(response.properties, 20);
-	                dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
-	                    property.img = getRandomImg(property.id);
-	                    return property;
-	                })));
-	                return properties;
-	            });
-	        },
-	        setFilteredProperties: function setFilteredProperties(filteredProperties) {
-	            dispatch((0, _vrfActions.setFilteredProperties)(filteredProperties));
-	        }
-	    };
-	})(AdvertisingsPage);
-
-/***/ },
-/* 750 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(475);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _propertyCard = __webpack_require__(740);
-
-	var _propertyCard2 = _interopRequireDefault(_propertyCard);
-
-	var _loading = __webpack_require__(748);
-
-	var _loading2 = _interopRequireDefault(_loading);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var PropertyList = function (_Component) {
-	    _inherits(PropertyList, _Component);
-
-	    function PropertyList(props) {
-	        _classCallCheck(this, PropertyList);
-
-	        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
-	    }
-
-	    _createClass(PropertyList, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props;
-	            var properties = _props.properties;
-	            var doneLoading = _props.doneLoading;
-
-
-	            if (!doneLoading) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { className: 'property-list-component' },
-	                    _react2.default.createElement(_loading2.default, null)
-	                );
-	            }
-
-	            if (!properties.length) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { className: 'property-list-component' },
-	                    _react2.default.createElement(
-	                        'p',
-	                        { className: 'info' },
-	                        'Não foram encontrados anúncios para sua busca.'
-	                    )
-	                );
-	            }
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'property-list-component' },
-	                properties.map(function (property) {
-	                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property, showFooterBtn: true });
-	                })
-	            );
-	        }
-	    }]);
-
-	    return PropertyList;
-	}(_react.Component);
-
-	PropertyList.propTypes = {
-	    properties: _react.PropTypes.array.isRequired,
-	    doneLoading: _react.PropTypes.bool.isRequired
-	};
-
-	exports.default = PropertyList;
-
-/***/ },
-/* 751 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(475);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _filterForm = __webpack_require__(752);
-
-	var _filterForm2 = _interopRequireDefault(_filterForm);
-
-	var _lodash = __webpack_require__(753);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var FilterBox = function (_Component) {
-	    _inherits(FilterBox, _Component);
-
-	    function FilterBox(props) {
-	        _classCallCheck(this, FilterBox);
-
-	        var _this = _possibleConstructorReturn(this, (FilterBox.__proto__ || Object.getPrototypeOf(FilterBox)).call(this, props));
-
-	        _this.doFilter = _this.doFilter.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(FilterBox, [{
-	        key: 'doFilter',
-	        value: function doFilter(params) {
-	            var router = this.context.router;
-
-	            router.push({
-	                pathname: '/anuncios',
-	                query: _lodash2.default.pickBy(params)
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var filter = this.props.filter;
-
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'filter-box-component' },
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'title' },
-	                    'Filtro'
-	                ),
-	                _react2.default.createElement(_filterForm2.default, { onSubmit: this.doFilter, initialValues: filter })
-	            );
-	        }
-	    }]);
-
-	    return FilterBox;
-	}(_react.Component);
-
-	FilterBox.propTypes = {
-	    filter: _react.PropTypes.object.isRequired
-	};
-
-	FilterBox.contextTypes = {
-	    router: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = FilterBox;
-
-/***/ },
-/* 752 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(475);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reduxForm = __webpack_require__(568);
-
-	var _lodash = __webpack_require__(753);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	var _classnames = __webpack_require__(754);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var renderField = function renderField(_ref) {
-	    var input = _ref.input;
-	    var placeholder = _ref.placeholder;
-	    var min = _ref.min;
-	    var type = _ref.type;
-	    var _ref$meta = _ref.meta;
-	    var touched = _ref$meta.touched;
-	    var error = _ref$meta.error;
-	    return _react2.default.createElement('input', _extends({}, input, { placeholder: placeholder, min: min, type: type, className: (0, _classnames2.default)({ error: touched && error }) }));
-	};
-
-	var FilterForm = function (_Component) {
-	    _inherits(FilterForm, _Component);
-
-	    function FilterForm(props) {
-	        _classCallCheck(this, FilterForm);
-
-	        return _possibleConstructorReturn(this, (FilterForm.__proto__ || Object.getPrototypeOf(FilterForm)).call(this, props));
-	    }
-
-	    _createClass(FilterForm, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props;
-	            var handleSubmit = _props.handleSubmit;
-	            var submitting = _props.submitting;
-
-
-	            return _react2.default.createElement(
-	                'form',
-	                { className: 'form', onSubmit: handleSubmit },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'id' },
-	                            'Id'
-	                        ),
-	                        _react2.default.createElement(_reduxForm.Field, { id: 'id', name: 'id', component: renderField, type: 'number', min: '1' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'area' },
-	                            'Área'
-	                        ),
-	                        _react2.default.createElement(_reduxForm.Field, { id: 'area', name: 'area', component: renderField, type: 'number', min: '1' })
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'beds' },
-	                            'Quartos'
-	                        ),
-	                        _react2.default.createElement(_reduxForm.Field, { id: 'beds', name: 'quartos', component: renderField, type: 'number', min: '1' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'baths' },
-	                            'Banheiros'
-	                        ),
-	                        _react2.default.createElement(_reduxForm.Field, { id: 'baths', name: 'banheiros', component: renderField, type: 'number', min: '1' })
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'price' },
-	                            'Valor'
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'center-align' },
-	                            _react2.default.createElement(_reduxForm.Field, { id: 'price', name: 'precoMin', component: renderField, type: 'number', placeholder: 'Mínimo', min: '1' }),
-	                            _react2.default.createElement('div', { className: 'separator' }),
-	                            _react2.default.createElement(_reduxForm.Field, { name: 'precoMax', component: renderField, type: 'number', placeholder: 'Máximo', min: '1' })
-	                        )
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'submit-row' },
-	                    _react2.default.createElement('input', { type: 'submit', value: 'Filtrar', disabled: submitting })
-	                )
-	            );
-	        }
-	    }]);
-
-	    return FilterForm;
-	}(_react.Component);
-
-	FilterForm.propTypes = {
-	    handleSubmit: _react.PropTypes.func.isRequired,
-	    submitting: _react.PropTypes.bool.isRequired
-	};
-
-	var validate = function validate(values) {
-	    var errors = {};
-
-	    if (typeof values.id !== 'undefined' && values.id !== '') {
-	        var id = parseInt(values.id);
-	        if (_lodash2.default.isNaN(id) || id !== parseFloat(values.id) || id < 1) {
-	            errors.id = 'Not valid id';
-	        }
-	    }
-
-	    if (typeof values.area !== 'undefined' && values.area !== '') {
-	        var area = parseInt(values.area);
-	        if (_lodash2.default.isNaN(area) || area !== parseFloat(values.area) || area < 1) {
-	            errors.area = 'Not valid area';
-	        }
-	    }
-
-	    if (typeof values.quartos !== 'undefined' && values.quartos !== '') {
-	        var quartos = parseInt(values.quartos);
-	        if (_lodash2.default.isNaN(quartos) || quartos !== parseFloat(values.quartos) || quartos < 1) {
-	            errors.quartos = 'Not valid quartos';
-	        }
-	    }
-
-	    if (typeof values.banheiros !== 'undefined' && values.banheiros !== '') {
-	        var banheiros = parseInt(values.banheiros);
-	        if (_lodash2.default.isNaN(banheiros) || banheiros !== parseFloat(values.banheiros) || banheiros < 1) {
-	            errors.banheiros = 'Not valid banheiros';
-	        }
-	    }
-
-	    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '') {
-	        var precoMin = parseInt(values.precoMin);
-	        if (_lodash2.default.isNaN(precoMin) || precoMin !== parseFloat(values.precoMin) || precoMin < 1) {
-	            errors.precoMin = 'Not valid precoMin';
-	        }
-	    }
-
-	    if (typeof values.precoMax !== 'undefined' && values.precoMax !== '') {
-	        var precoMax = parseInt(values.precoMax);
-	        if (_lodash2.default.isNaN(precoMax) || precoMax !== parseFloat(values.precoMax) || precoMax < 1) {
-	            errors.precoMax = 'Not valid precoMax';
-	        }
-	    }
-
-	    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '' && typeof values.precoMax !== 'undefined' && values.precoMax !== '' && parseInt(values.precoMin) > parseInt(values.precoMax)) {
-	        errors.precoMin = 'Not valid precoMin';
-	        errors.precoMax = 'Not valid precoMax';
-	    }
-
-	    return errors;
-	};
-
-	exports.default = (0, _reduxForm.reduxForm)({
-	    form: 'filter',
-	    enableReinitialize: true,
-	    validate: validate
-	})(FilterForm);
-
-/***/ },
-/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -65315,6 +64784,543 @@
 	}.call(this));
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(666)(module)))
+
+/***/ },
+/* 750 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(475);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(544);
+
+	var _propertyList = __webpack_require__(751);
+
+	var _propertyList2 = _interopRequireDefault(_propertyList);
+
+	var _http = __webpack_require__(747);
+
+	var _http2 = _interopRequireDefault(_http);
+
+	var _spotipposApi = __webpack_require__(745);
+
+	var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
+
+	var _vrfActions = __webpack_require__(567);
+
+	var _filterBox = __webpack_require__(752);
+
+	var _filterBox2 = _interopRequireDefault(_filterBox);
+
+	var _filter = __webpack_require__(755);
+
+	var _filter2 = _interopRequireDefault(_filter);
+
+	var _lodash = __webpack_require__(749);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AdvertisingsPage = function (_Component) {
+	    _inherits(AdvertisingsPage, _Component);
+
+	    function AdvertisingsPage(props) {
+	        _classCallCheck(this, AdvertisingsPage);
+
+	        return _possibleConstructorReturn(this, (AdvertisingsPage.__proto__ || Object.getPrototypeOf(AdvertisingsPage)).call(this, props));
+	    }
+
+	    _createClass(AdvertisingsPage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _props = this.props;
+	            var properties = _props.properties;
+	            var getProperties = _props.getProperties;
+	            var setFilteredProperties = _props.setFilteredProperties;
+	            var location = _props.location;
+
+
+	            if (!properties.length) {
+	                getProperties().then(function (properties) {
+	                    setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	                });
+	            } else {
+	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	            }
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            var location = nextProps.location;
+	            var properties = nextProps.properties;
+	            var setFilteredProperties = nextProps.setFilteredProperties;
+
+
+	            if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
+	                setFilteredProperties(_filter2.default.filterProperties(properties, location.query));
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props2 = this.props;
+	            var properties = _props2.properties;
+	            var filteredProperties = _props2.filteredProperties;
+	            var location = _props2.location;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'advertisings-page' },
+	                _react2.default.createElement(_filterBox2.default, { filter: location.query }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'page-content' },
+	                    _react2.default.createElement(_propertyList2.default, { properties: filteredProperties, doneLoading: !!properties.length || !!filteredProperties.length })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return AdvertisingsPage;
+	}(_react.Component);
+
+	AdvertisingsPage.propTypes = {
+	    properties: _react.PropTypes.array.isRequired,
+	    getProperties: _react.PropTypes.func.isRequired,
+	    location: _react.PropTypes.object.isRequired,
+	    filter: _react.PropTypes.object,
+	    filteredProperties: _react.PropTypes.array.isRequired,
+	    setFilteredProperties: _react.PropTypes.func.isRequired
+	};
+
+	function getRandomImg(id) {
+	    return '/imgs/property_placeholder_' + id % 5 + '.jpg';
+	}
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return { properties: state.properties, filteredProperties: state.filteredProperties, filter: state.form.filter && state.form.filter.values };
+	}, function (dispatch) {
+	    return {
+	        getProperties: function getProperties() {
+	            var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
+
+	            return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
+	                var properties = _lodash2.default.take(response.properties, 20);
+	                dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
+	                    property.img = getRandomImg(property.id);
+	                    return property;
+	                })));
+	                return properties;
+	            });
+	        },
+	        setFilteredProperties: function setFilteredProperties(filteredProperties) {
+	            dispatch((0, _vrfActions.setFilteredProperties)(filteredProperties));
+	        }
+	    };
+	})(AdvertisingsPage);
+
+/***/ },
+/* 751 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(475);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _propertyCard = __webpack_require__(740);
+
+	var _propertyCard2 = _interopRequireDefault(_propertyCard);
+
+	var _loading = __webpack_require__(748);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropertyList = function (_Component) {
+	    _inherits(PropertyList, _Component);
+
+	    function PropertyList(props) {
+	        _classCallCheck(this, PropertyList);
+
+	        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
+	    }
+
+	    _createClass(PropertyList, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var properties = _props.properties;
+	            var doneLoading = _props.doneLoading;
+
+
+	            if (!doneLoading) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'property-list-component' },
+	                    _react2.default.createElement(_loading2.default, null)
+	                );
+	            }
+
+	            if (!properties.length) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'property-list-component' },
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'info' },
+	                        'Não foram encontrados anúncios para sua busca.'
+	                    )
+	                );
+	            }
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'property-list-component' },
+	                properties.map(function (property) {
+	                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property, showFooterBtn: true });
+	                })
+	            );
+	        }
+	    }]);
+
+	    return PropertyList;
+	}(_react.Component);
+
+	PropertyList.propTypes = {
+	    properties: _react.PropTypes.array.isRequired,
+	    doneLoading: _react.PropTypes.bool.isRequired
+	};
+
+	exports.default = PropertyList;
+
+/***/ },
+/* 752 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(475);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _filterForm = __webpack_require__(753);
+
+	var _filterForm2 = _interopRequireDefault(_filterForm);
+
+	var _lodash = __webpack_require__(749);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FilterBox = function (_Component) {
+	    _inherits(FilterBox, _Component);
+
+	    function FilterBox(props) {
+	        _classCallCheck(this, FilterBox);
+
+	        var _this = _possibleConstructorReturn(this, (FilterBox.__proto__ || Object.getPrototypeOf(FilterBox)).call(this, props));
+
+	        _this.doFilter = _this.doFilter.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(FilterBox, [{
+	        key: 'doFilter',
+	        value: function doFilter(params) {
+	            var router = this.context.router;
+
+	            router.push({
+	                pathname: '/anuncios',
+	                query: _lodash2.default.pickBy(params)
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var filter = this.props.filter;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'filter-box-component' },
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'title' },
+	                    'Filtro'
+	                ),
+	                _react2.default.createElement(_filterForm2.default, { onSubmit: this.doFilter, initialValues: filter })
+	            );
+	        }
+	    }]);
+
+	    return FilterBox;
+	}(_react.Component);
+
+	FilterBox.propTypes = {
+	    filter: _react.PropTypes.object.isRequired
+	};
+
+	FilterBox.contextTypes = {
+	    router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = FilterBox;
+
+/***/ },
+/* 753 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(475);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reduxForm = __webpack_require__(568);
+
+	var _lodash = __webpack_require__(749);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _classnames = __webpack_require__(754);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var renderField = function renderField(_ref) {
+	    var input = _ref.input;
+	    var placeholder = _ref.placeholder;
+	    var min = _ref.min;
+	    var type = _ref.type;
+	    var _ref$meta = _ref.meta;
+	    var touched = _ref$meta.touched;
+	    var error = _ref$meta.error;
+	    return _react2.default.createElement('input', _extends({}, input, { placeholder: placeholder, min: min, type: type, className: (0, _classnames2.default)({ error: touched && error }) }));
+	};
+
+	var FilterForm = function (_Component) {
+	    _inherits(FilterForm, _Component);
+
+	    function FilterForm(props) {
+	        _classCallCheck(this, FilterForm);
+
+	        return _possibleConstructorReturn(this, (FilterForm.__proto__ || Object.getPrototypeOf(FilterForm)).call(this, props));
+	    }
+
+	    _createClass(FilterForm, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var handleSubmit = _props.handleSubmit;
+	            var submitting = _props.submitting;
+
+
+	            return _react2.default.createElement(
+	                'form',
+	                { className: 'form', onSubmit: handleSubmit },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'id' },
+	                            'Id'
+	                        ),
+	                        _react2.default.createElement(_reduxForm.Field, { id: 'id', name: 'id', component: renderField, type: 'number', min: '1' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'area' },
+	                            'Área'
+	                        ),
+	                        _react2.default.createElement(_reduxForm.Field, { id: 'area', name: 'area', component: renderField, type: 'number', min: '1' })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'beds' },
+	                            'Quartos'
+	                        ),
+	                        _react2.default.createElement(_reduxForm.Field, { id: 'beds', name: 'quartos', component: renderField, type: 'number', min: '1' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'baths' },
+	                            'Banheiros'
+	                        ),
+	                        _react2.default.createElement(_reduxForm.Field, { id: 'baths', name: 'banheiros', component: renderField, type: 'number', min: '1' })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'price' },
+	                            'Valor'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'center-align' },
+	                            _react2.default.createElement(_reduxForm.Field, { id: 'price', name: 'precoMin', component: renderField, type: 'number', placeholder: 'Mínimo', min: '1' }),
+	                            _react2.default.createElement('div', { className: 'separator' }),
+	                            _react2.default.createElement(_reduxForm.Field, { name: 'precoMax', component: renderField, type: 'number', placeholder: 'Máximo', min: '1' })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'submit-row' },
+	                    _react2.default.createElement('input', { type: 'submit', value: 'Filtrar', disabled: submitting })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return FilterForm;
+	}(_react.Component);
+
+	FilterForm.propTypes = {
+	    handleSubmit: _react.PropTypes.func.isRequired,
+	    submitting: _react.PropTypes.bool.isRequired
+	};
+
+	var validate = function validate(values) {
+	    var errors = {};
+
+	    if (typeof values.id !== 'undefined' && values.id !== '') {
+	        var id = parseInt(values.id);
+	        if (_lodash2.default.isNaN(id) || id !== parseFloat(values.id) || id < 1) {
+	            errors.id = 'Not valid id';
+	        }
+	    }
+
+	    if (typeof values.area !== 'undefined' && values.area !== '') {
+	        var area = parseInt(values.area);
+	        if (_lodash2.default.isNaN(area) || area !== parseFloat(values.area) || area < 1) {
+	            errors.area = 'Not valid area';
+	        }
+	    }
+
+	    if (typeof values.quartos !== 'undefined' && values.quartos !== '') {
+	        var quartos = parseInt(values.quartos);
+	        if (_lodash2.default.isNaN(quartos) || quartos !== parseFloat(values.quartos) || quartos < 1) {
+	            errors.quartos = 'Not valid quartos';
+	        }
+	    }
+
+	    if (typeof values.banheiros !== 'undefined' && values.banheiros !== '') {
+	        var banheiros = parseInt(values.banheiros);
+	        if (_lodash2.default.isNaN(banheiros) || banheiros !== parseFloat(values.banheiros) || banheiros < 1) {
+	            errors.banheiros = 'Not valid banheiros';
+	        }
+	    }
+
+	    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '') {
+	        var precoMin = parseInt(values.precoMin);
+	        if (_lodash2.default.isNaN(precoMin) || precoMin !== parseFloat(values.precoMin) || precoMin < 1) {
+	            errors.precoMin = 'Not valid precoMin';
+	        }
+	    }
+
+	    if (typeof values.precoMax !== 'undefined' && values.precoMax !== '') {
+	        var precoMax = parseInt(values.precoMax);
+	        if (_lodash2.default.isNaN(precoMax) || precoMax !== parseFloat(values.precoMax) || precoMax < 1) {
+	            errors.precoMax = 'Not valid precoMax';
+	        }
+	    }
+
+	    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '' && typeof values.precoMax !== 'undefined' && values.precoMax !== '' && parseInt(values.precoMin) > parseInt(values.precoMax)) {
+	        errors.precoMin = 'Not valid precoMin';
+	        errors.precoMax = 'Not valid precoMax';
+	    }
+
+	    return errors;
+	};
+
+	exports.default = (0, _reduxForm.reduxForm)({
+	    form: 'filter',
+	    enableReinitialize: true,
+	    validate: validate
+	})(FilterForm);
 
 /***/ },
 /* 754 */

@@ -7,8 +7,16 @@
     top: 0;
     padding-top: 60px;
 
+    @media (max-width: @smallScreen) {
+        width: 61px;
+    }
+
     nav {
         padding: 15px 8px;
+
+        @media (max-width: @smallScreen) {
+            padding: 8px 4px;
+        }
 
         a {
             .no-select();
@@ -29,6 +37,11 @@
             justify-content: center;
             align-items: center;
 
+            @media (max-width: @smallScreen) {
+                width: 53px;
+                height: 54px;
+            }
+
             &:not(:first-child) {
                 margin-top: 15px;
             }
@@ -40,6 +53,10 @@
             span {
                 margin-top: 8px;
                 text-align: center;
+
+                @media (max-width: @smallScreen) {
+                    display: none;
+                }
             }
         }
     }

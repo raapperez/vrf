@@ -3,6 +3,10 @@
     height: 100%;
     margin-right: 14.5px;
 
+    @media (max-width: @smallScreen) {
+            margin-right: 10px;
+    }
+
     .info {
         display: flex;
         flex-direction: column;
@@ -25,5 +29,9 @@
         font-stretch: condensed;
         color: @warmGreyColor;
         text-transform: uppercase;
+
+        @media (max-width: @smallScreen) {
+            font-size: 10px;
+        }
     }
 }

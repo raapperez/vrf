@@ -5,6 +5,11 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
     padding: 15px 16.8px 15px 16.2px;
 
+    @media (max-width: @smallScreen) {
+        margin: 0;
+        padding: 15px 6px 15px 6px;
+    }
+
     .info {
         font-size: 18px;
         font-weight: normal;
@@ -13,5 +18,9 @@
         line-height: 1.5;
         color: @greyishBrownColor;
         padding: 16px;
+
+        @media (max-width: @smallScreen) {
+            padding: 0;
+        }
     }
 }

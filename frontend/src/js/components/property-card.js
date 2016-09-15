@@ -28,6 +28,8 @@ class PropertyCard extends Component {
                         <span className="id">ID.{property.id}</span>
                         <h2 className="title">{property.title}</h2>
                         <p className="description">{property.description}</p>
+                        <img className="no-select img" src={property.img} />
+                        <span className="price">{this.formatPrice(property.price) }</span>
                     </div>
 
                     <div className="footer">
@@ -40,7 +42,7 @@ class PropertyCard extends Component {
                         <FooterInfo imgUrl="/imgs/ic-card-bathroom.svg">
                             {property.baths} Banheiro{parseInt(property.baths) === 1 ? '' : 's'}
                         </FooterInfo>
-                        {showFooterBtn ?
+                        {showFooterBtn || true ?
                             <Link to={`/anuncio/${property.id}`}>Visualizar anúncio</Link>
                             : null
                         }
