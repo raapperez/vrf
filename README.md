@@ -14,7 +14,7 @@ npm install
 
 ## Execução
 
-### Para executar em produção:
+### Para executar em modo produção:
 
 O modo em produção faz uglify dos arquivos javascripts e configura o Express para fazer compressão dos arquivos.
 
@@ -36,9 +36,9 @@ npm run test
 
 ## Considerações
 
-* O código fonte frontend está em */frontend/src/js*. Este código foi feito usando ES6 e por motivos de compatibilidade é compilado para a pasta */frontend/js*  pelo *babel* para ser usado no server rendering. Este código também é compilado pelo *wepback* e enviado para a pasta */public/js* para ser carregado na página.
+* O código fonte frontend está em **/frontend/src/js**. Este código foi feito usando ES6 e por motivos de compatibilidade é compilado para a pasta **/frontend/js**  pelo **babel** para ser usado no server rendering. Este código também é compilado pelo **wepback** e enviado para a pasta **/public/js** para ser carregado na página.
 
-* Os arquivos fonte LESS estão na pasta */frontend/less*. Estes arquivos são compilados para CSS pelo *gulp* e enviados para a pasta */public/css*.
+* Os arquivos fonte LESS estão na pasta **/frontend/less**. Estes arquivos são compilados para CSS pelo **gulp** e enviados para a pasta **/public/css**.
 
 * Como são páginas a serem indexadas por algoritmos de busca, foi utilizado o server rendering do React para trazer o html já com o conteúdo, e a partir desse momento, a aplicação funciona como uma single page application utilizando chamadas assíncronas para obter conteúdo.
 
@@ -47,9 +47,9 @@ npm run test
     - Daria preferência a alguns territórios em detrimento de outros, e isso poderia causar discórdia entre os bytes até então pacíficos.
 Por causa disso foi decidido não ter paginação. Mas saibam que estou bem habituado a fazer.
 
-* Como a grande quantidade de dados inviabiliza ver de forma adequada a solução devido à lentidão que o browser fica. Limitei o número de anúncios a serem mostrados. Para alterar essa configuração edite o arquivo */frontend/src/js/contants.js* o valor *maxProperties*.
+* Como a grande quantidade de dados inviabiliza ver de forma adequada a solução devido à lentidão que o browser fica. Limitei o número de anúncios a serem mostrados. Para alterar essa configuração edite o arquivo **/frontend/src/js/contants.js** o valor **maxProperties**.
 
-* Lembrando que sempre que um arquivo for alterado dentro da pasta */frontend/src/*, o projeto tem que ser recompilado.
+* Lembrando que sempre que um arquivo for alterado dentro da pasta **/frontend/src/**, o projeto tem que ser recompilado.
 
 * No layout fornecido, o filtro não possuía um botão de submit. Achei melhor colocar porque achei muito estranho o usuário ser obrigado a apertar enter para filtrar ou usar o onBlur dos campos de texto.
 
