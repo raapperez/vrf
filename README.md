@@ -49,6 +49,7 @@ npm run test
 * Como são muitos anúncios, o correto seria fazer paginação para mostrar poucos anúncios por vez. Porém, a api apresentada não vinha com opções de paginação. Cheguei a pensar em restringir a área para buscar menos dados por vez mas isso causaria os seguintes problemas:
     - Cada pedaço de área poderia ter mais ou menos anúncios;
     - Daria preferência a alguns territórios em detrimento de outros, e isso poderia causar discórdia entre os bytes até então pacíficos.
+    
 Por causa disso foi decidido não ter paginação. Mas saibam que estou bem habituado a fazer.
 
 * Como a grande quantidade de dados inviabiliza ver de forma adequada a solução devido à lentidão que o browser fica. Limitei o número de anúncios a serem mostrados. Para alterar essa configuração edite o arquivo **/frontend/src/js/contants.js** o valor **maxProperties**.
