@@ -38,6 +38,8 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _constants = require('../constants');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -131,7 +133,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
             var spotipposApi = new _spotipposApi2.default(new _http2.default(window.fetch));
 
             return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
-                var properties = _lodash2.default.take(response.properties, 20);
+                var properties = _lodash2.default.take(response.properties, _constants.maxProperties);
                 dispatch((0, _vrfActions.setProperties)(properties.map(function (property) {
                     property.img = getRandomImg(property.id);
                     return property;

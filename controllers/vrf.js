@@ -15,7 +15,7 @@ const filterService = require('../frontend/js/services/filter').default;
 const currencyFormatter = require('currency-formatter');
 
 const spotipposApi = new SpotipposApi(new Http(fetch));
-
+const {maxProperties} = require('../frontend/js/constants');
 
 // TODO: remove when property comes with img url
 function getRandomImg(id) {
@@ -24,7 +24,7 @@ function getRandomImg(id) {
 
 function getAdvertisingsInitialState(req) {
     return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(response => {
-        const properties = _.take(response.properties, 20).map(property => {
+        const properties = _.take(response.properties, maxProperties).map(property => {
             property.img = getRandomImg(property.id);
             return property;
         });

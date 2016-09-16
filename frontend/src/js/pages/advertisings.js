@@ -9,6 +9,7 @@ import {setProperties, setFilteredProperties} from '../actions/vrf-actions';
 import FilterBox from '../components/filter-box';
 import filterService from '../services/filter';
 import _ from 'lodash';
+import {maxProperties}  from '../constants';
 
 class AdvertisingsPage extends Component {
 
@@ -70,7 +71,7 @@ export default connect(
             const spotipposApi = new SpotipposApi(new Http(window.fetch));
 
             return spotipposApi.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(response => {
-                const properties = _.take(response.properties, 20);
+                const properties = _.take(response.properties, maxProperties);
                 dispatch(setProperties(properties.map(property => {
                     property.img = getRandomImg(property.id);
                     return property;
