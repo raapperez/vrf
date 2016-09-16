@@ -1,10 +1,19 @@
 <!DOCTYPE HTML>
-<html class="full-height">
+<html lang="pt-BR" class="full-height">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8">
+
+  <%
+    if(data.header && data.header.metas) {
+      data.header.metas.forEach(meta => {      
+  %><meta<%= _.reduce(meta, (result, value, key) => { return result + ` ${key}="${value}"`;}, '') %> />
+  <%
+      });
+    }
+  %>
 
   <title>
     SPOTIPPOS

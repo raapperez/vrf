@@ -18,9 +18,9 @@ class PropertyCard extends Component {
         const {property, showFooterBtn} = this.props;
 
         return (
-            <div className="property-card-component">
+            <article className="property-card-component">
                 <div className="left-box">
-                    <img className="no-select" src={property.img} />
+                    <img className="no-select" src={property.img} alt={property.title}/>
                     <span className="price">{this.formatPrice(property.price) }</span>
                 </div>
                 <div className="right-box">
@@ -28,7 +28,7 @@ class PropertyCard extends Component {
                         <span className="id">ID.{property.id}</span>
                         <h2 className="title">{property.title}</h2>
                         <p className="description">{property.description}</p>
-                        <img className="no-select img" src={property.img} />
+                        <img className="no-select img" src={property.img} alt={property.title} />
                         <span className="price">{this.formatPrice(property.price) }</span>
                     </div>
 
@@ -42,8 +42,8 @@ class PropertyCard extends Component {
                         <FooterInfo imgUrl="/imgs/ic-card-bathroom.svg">
                             {property.baths} Banheiro{parseInt(property.baths) === 1 ? '' : 's'}
                         </FooterInfo>
-                        {showFooterBtn || true ?
-                            <Link to={`/anuncio/${property.id}`}>Visualizar anúncio</Link>
+                        {showFooterBtn ?
+                            <Link to={`/anuncio/${property.id}`} title={`Ver detalhes de ${property.title}`}>Visualizar anúncio</Link>
                             : null
                         }
 
@@ -51,7 +51,7 @@ class PropertyCard extends Component {
                 </div>
 
 
-            </div>
+            </article>
         );
     }
 }

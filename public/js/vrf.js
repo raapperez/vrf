@@ -45746,12 +45746,12 @@
 
 
 	            return _react2.default.createElement(
-	                'div',
+	                'article',
 	                { className: 'property-card-component' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'left-box' },
-	                    _react2.default.createElement('img', { className: 'no-select', src: property.img }),
+	                    _react2.default.createElement('img', { className: 'no-select', src: property.img, alt: property.title }),
 	                    _react2.default.createElement(
 	                        'span',
 	                        { className: 'price' },
@@ -45780,7 +45780,7 @@
 	                            { className: 'description' },
 	                            property.description
 	                        ),
-	                        _react2.default.createElement('img', { className: 'no-select img', src: property.img }),
+	                        _react2.default.createElement('img', { className: 'no-select img', src: property.img, alt: property.title }),
 	                        _react2.default.createElement(
 	                            'span',
 	                            { className: 'price' },
@@ -45810,9 +45810,9 @@
 	                            ' Banheiro',
 	                            parseInt(property.baths) === 1 ? '' : 's'
 	                        ),
-	                        showFooterBtn || true ? _react2.default.createElement(
+	                        showFooterBtn ? _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { to: '/anuncio/' + property.id },
+	                            { to: '/anuncio/' + property.id, title: 'Ver detalhes de ' + property.title },
 	                            'Visualizar anúncio'
 	                        ) : null
 	                    )

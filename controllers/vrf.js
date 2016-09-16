@@ -12,8 +12,10 @@ const fetch = require('node-fetch');
 const Http = require('../frontend/js/services/http').default;
 const SpotipposApi = require('../frontend/js/services/spotippos-api').default;
 const filterService = require('../frontend/js/services/filter').default;
+const currencyFormatter = require('currency-formatter');
 
 const spotipposApi = new SpotipposApi(new Http(fetch));
+
 
 // TODO: remove when property comes with img url
 function getRandomImg(id) {
@@ -28,23 +30,51 @@ function getAdvertisingsInitialState(req) {
         });
         const filteredProperties = filterService.filterProperties(properties, req.query);
 
-        return { filteredProperties };
+        const header = {
+            metas: [
+                {
+                    name: 'description',
+                    content: `Encontre os melhores imóveis para alugar ou comprar.`
+                }
+            ]
+            
+        };
+
+        return { initialState: { filteredProperties }, header };
     });
 }
 
 function getAdvertisingInitialState(req) {
     return spotipposApi.get('properties', req.params.id).then(property => {
-        if(_.isEmpty(property)) {
+        if (_.isEmpty(property)) {
             const error = new Error(`Property ${req.params.id} not found`);
             error.status = 404;
             throw error;
         }
         property.img = getRandomImg(property.id);
-        return { property };
+        
+        const header = {
+            metas: [
+                {
+                    name: 'description',
+                    content: `Compre ${property.title} por ${currencyFormatter.format(property.price, { code: 'BRL' })}`
+                },
+                {
+                    property: 'place:location:latitude',
+                    content: property.lat
+                },
+                {
+                    property: 'place:location:longitude',
+                    content: property.long
+                }
+            ]
+        };
+
+        return { initialState: { property }, header };
     });
 }
 
-function handleRequest(req, res, next, getInitialState) {
+function handleRequest(req, res, next, getData) {
     match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
         if (error) {
             next(error);
@@ -58,19 +88,20 @@ function handleRequest(req, res, next, getInitialState) {
         }
 
         if (renderProps) {
-            if (getInitialState) {
-                getInitialState(req).then(initialState => {
+            if (getData) {
+                getData(req).then(data => {
                     res.status(200).render('vrf', {
-                        data: {
-                            entryPoint: ReactDOMServer.renderToString(serverSide(renderProps, initialState)),
-                            initialState
-                        }
+                        _,
+                        data: Object.assign({
+                            entryPoint: ReactDOMServer.renderToString(serverSide(renderProps, data.initialState)),
+                        }, data)
                     });
                 }).catch(err => {
                     next(err);
                 });
             } else {
                 res.status(200).render('vrf', {
+                    _,
                     data: {
                         entryPoint: ReactDOMServer.renderToString(serverSide(renderProps))
                     }
