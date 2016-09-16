@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.validate = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -146,52 +147,52 @@ FilterForm.propTypes = {
     submitting: _react.PropTypes.bool.isRequired
 };
 
-var validate = function validate(values) {
+var validate = exports.validate = function validate(values) {
     var errors = {};
 
-    if (typeof values.id !== 'undefined' && values.id !== '') {
+    if (typeof values.id !== 'undefined' && values.id !== null && values.id !== '') {
         var id = parseInt(values.id);
         if (_lodash2.default.isNaN(id) || id !== parseFloat(values.id) || id < 1) {
             errors.id = 'Not valid id';
         }
     }
 
-    if (typeof values.area !== 'undefined' && values.area !== '') {
+    if (typeof values.area !== 'undefined' && values.area !== null && values.area !== '') {
         var area = parseInt(values.area);
         if (_lodash2.default.isNaN(area) || area !== parseFloat(values.area) || area < 1) {
             errors.area = 'Not valid area';
         }
     }
 
-    if (typeof values.quartos !== 'undefined' && values.quartos !== '') {
+    if (typeof values.quartos !== 'undefined' && values.quartos !== null && values.quartos !== '') {
         var quartos = parseInt(values.quartos);
         if (_lodash2.default.isNaN(quartos) || quartos !== parseFloat(values.quartos) || quartos < 1) {
             errors.quartos = 'Not valid quartos';
         }
     }
 
-    if (typeof values.banheiros !== 'undefined' && values.banheiros !== '') {
+    if (typeof values.banheiros !== 'undefined' && values.banheiros !== null && values.banheiros !== '') {
         var banheiros = parseInt(values.banheiros);
         if (_lodash2.default.isNaN(banheiros) || banheiros !== parseFloat(values.banheiros) || banheiros < 1) {
             errors.banheiros = 'Not valid banheiros';
         }
     }
 
-    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '') {
+    if (typeof values.precoMin !== 'undefined' && values.precoMin !== null && values.precoMin !== '') {
         var precoMin = parseInt(values.precoMin);
         if (_lodash2.default.isNaN(precoMin) || precoMin !== parseFloat(values.precoMin) || precoMin < 1) {
             errors.precoMin = 'Not valid precoMin';
         }
     }
 
-    if (typeof values.precoMax !== 'undefined' && values.precoMax !== '') {
+    if (typeof values.precoMax !== 'undefined' && values.precoMax !== null && values.precoMax !== '') {
         var precoMax = parseInt(values.precoMax);
         if (_lodash2.default.isNaN(precoMax) || precoMax !== parseFloat(values.precoMax) || precoMax < 1) {
             errors.precoMax = 'Not valid precoMax';
         }
     }
 
-    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '' && typeof values.precoMax !== 'undefined' && values.precoMax !== '' && parseInt(values.precoMin) > parseInt(values.precoMax)) {
+    if (typeof values.precoMin !== 'undefined' && values.precoMin !== null && values.precoMin !== '' && typeof values.precoMax !== 'undefined' && values.precoMax !== null && values.precoMax !== '' && parseInt(values.precoMin) > parseInt(values.precoMax)) {
         errors.precoMin = 'Not valid precoMin';
         errors.precoMax = 'Not valid precoMax';
     }

@@ -68,58 +68,60 @@ FilterForm.propTypes = {
 
 
 
-const validate = values => {
+export const validate = values => {
     const errors = {};
 
-    if (typeof values.id !== 'undefined' && values.id !== '') {
+    if (typeof values.id !== 'undefined' && values.id !== null && values.id !== '') {
         const id = parseInt(values.id);
         if(_.isNaN(id) || id !== parseFloat(values.id) || id < 1) {
             errors.id = 'Not valid id';
         }
     }
 
-    if (typeof values.area !== 'undefined' && values.area !== '') {
+    if (typeof values.area !== 'undefined' && values.area !== null && values.area !== '') {
         const area = parseInt(values.area);
         if(_.isNaN(area) || area !== parseFloat(values.area) || area < 1) {
             errors.area = 'Not valid area';
         }
     }
 
-    if (typeof values.quartos !== 'undefined' && values.quartos !== '') {
+    if (typeof values.quartos !== 'undefined' && values.quartos !== null && values.quartos !== '') {
         const quartos = parseInt(values.quartos);
         if(_.isNaN(quartos) || quartos !== parseFloat(values.quartos) || quartos < 1) {
             errors.quartos = 'Not valid quartos';
         }
     }
 
-    if (typeof values.banheiros !== 'undefined' && values.banheiros !== '') {
+    if (typeof values.banheiros !== 'undefined' && values.banheiros !== null && values.banheiros !== '') {
         const banheiros = parseInt(values.banheiros);
         if(_.isNaN(banheiros) || banheiros !== parseFloat(values.banheiros) || banheiros < 1) {
             errors.banheiros = 'Not valid banheiros';
         }
     }
 
-    if (typeof values.precoMin !== 'undefined' && values.precoMin !== '') {
+    if (typeof values.precoMin !== 'undefined' && values.precoMin !== null && values.precoMin !== '') {
         const precoMin = parseInt(values.precoMin);
         if(_.isNaN(precoMin) || precoMin !== parseFloat(values.precoMin) || precoMin < 1) {
             errors.precoMin = 'Not valid precoMin';
         }
     }
 
-    if (typeof values.precoMax !== 'undefined' && values.precoMax !== '') {
+    if (typeof values.precoMax !== 'undefined' && values.precoMax !== null && values.precoMax !== '') {
         const precoMax = parseInt(values.precoMax);
         if(_.isNaN(precoMax) || precoMax !== parseFloat(values.precoMax) || precoMax < 1) {
             errors.precoMax = 'Not valid precoMax';
         }
     }
 
-    if(typeof values.precoMin !== 'undefined' && values.precoMin !== '' && typeof values.precoMax !== 'undefined' && values.precoMax !== '' && parseInt(values.precoMin) > parseInt(values.precoMax)) {
+    if(typeof values.precoMin !== 'undefined' && values.precoMin !== null && values.precoMin !== '' && typeof values.precoMax !== 'undefined' && values.precoMax !== null && values.precoMax !== '' && parseInt(values.precoMin) > parseInt(values.precoMax)) {
         errors.precoMin = 'Not valid precoMin';
         errors.precoMax = 'Not valid precoMax';
     }
 
     return errors;
 };
+
+
 
 export default reduxForm({
     form: 'filter',
