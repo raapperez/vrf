@@ -43,7 +43,7 @@ npm run test
 * Como são páginas a serem indexadas por algoritmos de busca, foi utilizado o server rendering do React para trazer o html já com o conteúdo, e a partir desse momento, a aplicação funciona como uma single page application utilizando chamadas assíncronas para obter conteúdo.
 
 * Como são muitos anúncios, o correto seria fazer paginação para mostrar poucos anúncios por vez. Porém, a api apresentada não vinha com opções de paginação. Cheguei a pensar em restringir a área para buscar menos dados por vez mas isso causaria os seguintes problemas:
-    - Cada pedaço de área poderia ter mais ou menos anúncios
+    - Cada pedaço de área poderia ter mais ou menos anúncios;
     - Daria preferência a alguns territórios em detrimento de outros, e isso poderia causar discórdia entre os bytes até então pacíficos.
 Por causa disso foi decidido não ter paginação. Mas saibam que estou bem habituado a fazer.
 
