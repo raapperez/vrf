@@ -23,11 +23,15 @@ npm run compile
 npm run start
 ```
 
+Acessar na url http://localhost:3000/anuncios
+
 ### Para executar em modo desenvolvimento:
 
 ```
 npm run start-dev
 ```
+
+Acessar na url http://localhost:3000/anuncios
 
 ### Para executar testes:
 ```
