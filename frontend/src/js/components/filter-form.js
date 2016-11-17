@@ -71,6 +71,10 @@ FilterForm.propTypes = {
 export const validate = values => {
     const errors = {};
 
+    if (!values) {
+        return errors;
+    }
+
     if (typeof values.id !== 'undefined' && values.id !== null && values.id !== '') {
         const id = parseInt(values.id);
         if(_.isNaN(id) || id !== parseFloat(values.id) || id < 1) {

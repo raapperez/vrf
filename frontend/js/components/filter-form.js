@@ -32,13 +32,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var renderField = function renderField(_ref) {
-    var input = _ref.input;
-    var placeholder = _ref.placeholder;
-    var min = _ref.min;
-    var type = _ref.type;
-    var _ref$meta = _ref.meta;
-    var touched = _ref$meta.touched;
-    var error = _ref$meta.error;
+    var input = _ref.input,
+        placeholder = _ref.placeholder,
+        min = _ref.min,
+        type = _ref.type,
+        _ref$meta = _ref.meta,
+        touched = _ref$meta.touched,
+        error = _ref$meta.error;
     return _react2.default.createElement('input', _extends({}, input, { placeholder: placeholder, min: min, type: type, className: (0, _classnames2.default)({ error: touched && error }) }));
 };
 
@@ -54,9 +54,9 @@ var FilterForm = function (_Component) {
     _createClass(FilterForm, [{
         key: 'render',
         value: function render() {
-            var _props = this.props;
-            var handleSubmit = _props.handleSubmit;
-            var submitting = _props.submitting;
+            var _props = this.props,
+                handleSubmit = _props.handleSubmit,
+                submitting = _props.submitting;
 
 
             return _react2.default.createElement(
@@ -81,7 +81,7 @@ var FilterForm = function (_Component) {
                         _react2.default.createElement(
                             'label',
                             { htmlFor: 'area' },
-                            'Área'
+                            '\xC1rea'
                         ),
                         _react2.default.createElement(_reduxForm.Field, { id: 'area', name: 'area', component: renderField, type: 'number', min: '1' })
                     )
@@ -124,9 +124,9 @@ var FilterForm = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'center-align' },
-                            _react2.default.createElement(_reduxForm.Field, { id: 'price', name: 'precoMin', component: renderField, type: 'number', placeholder: 'Mínimo', min: '1' }),
+                            _react2.default.createElement(_reduxForm.Field, { id: 'price', name: 'precoMin', component: renderField, type: 'number', placeholder: 'M\xEDnimo', min: '1' }),
                             _react2.default.createElement('div', { className: 'separator' }),
-                            _react2.default.createElement(_reduxForm.Field, { name: 'precoMax', component: renderField, type: 'number', placeholder: 'Máximo', min: '1' })
+                            _react2.default.createElement(_reduxForm.Field, { name: 'precoMax', component: renderField, type: 'number', placeholder: 'M\xE1ximo', min: '1' })
                         )
                     )
                 ),
@@ -149,6 +149,10 @@ FilterForm.propTypes = {
 
 var validate = exports.validate = function validate(values) {
     var errors = {};
+
+    if (!values) {
+        return errors;
+    }
 
     if (typeof values.id !== 'undefined' && values.id !== null && values.id !== '') {
         var id = parseInt(values.id);

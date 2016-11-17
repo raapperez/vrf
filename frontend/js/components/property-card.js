@@ -45,9 +45,9 @@ var PropertyCard = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _props = this.props;
-            var property = _props.property;
-            var showFooterBtn = _props.showFooterBtn;
+            var _props = this.props,
+                property = _props.property,
+                showFooterBtn = _props.showFooterBtn;
 
 
             return _react2.default.createElement(
@@ -99,7 +99,7 @@ var PropertyCard = function (_Component) {
                             _footerInfo2.default,
                             { imgUrl: '/imgs/ic-card-area.svg' },
                             property.squareMeters,
-                            ' M²'
+                            ' M\xB2'
                         ),
                         _react2.default.createElement(
                             _footerInfo2.default,
@@ -118,7 +118,7 @@ var PropertyCard = function (_Component) {
                         showFooterBtn ? _react2.default.createElement(
                             _reactRouter.Link,
                             { to: '/anuncio/' + property.id, title: 'Ver detalhes de ' + property.title },
-                            'Visualizar anúncio'
+                            'Visualizar an\xFAncio'
                         ) : null
                     )
                 )

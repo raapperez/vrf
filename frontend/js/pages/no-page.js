@@ -33,7 +33,7 @@ var NoPage = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'no-page' },
-                'Esta página não faz parte do escopo! :D'
+                'Esta p\xE1gina n\xE3o faz parte do escopo! :D'
             );
         }
     }]);

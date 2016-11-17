@@ -42,7 +42,7 @@ var Header = function (_Component) {
                 _react2.default.createElement(
                     'h1',
                     { className: 'title' },
-                    'SPOTIPPOS - ANÚNCIOS'
+                    'SPOTIPPOS - AN\xDANCIOS'
                 )
             );
         }

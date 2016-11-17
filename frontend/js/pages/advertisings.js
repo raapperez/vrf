@@ -60,11 +60,11 @@ var AdvertisingsPage = function (_Component) {
     _createClass(AdvertisingsPage, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _props = this.props;
-            var properties = _props.properties;
-            var getProperties = _props.getProperties;
-            var setFilteredProperties = _props.setFilteredProperties;
-            var location = _props.location;
+            var _props = this.props,
+                properties = _props.properties,
+                getProperties = _props.getProperties,
+                setFilteredProperties = _props.setFilteredProperties,
+                location = _props.location;
 
 
             if (!properties.length) {
@@ -78,9 +78,9 @@ var AdvertisingsPage = function (_Component) {
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            var location = nextProps.location;
-            var properties = nextProps.properties;
-            var setFilteredProperties = nextProps.setFilteredProperties;
+            var location = nextProps.location,
+                properties = nextProps.properties,
+                setFilteredProperties = nextProps.setFilteredProperties;
 
 
             if (!_lodash2.default.isEqual(location.query, this.props.location.query)) {
@@ -90,10 +90,10 @@ var AdvertisingsPage = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _props2 = this.props;
-            var properties = _props2.properties;
-            var filteredProperties = _props2.filteredProperties;
-            var location = _props2.location;
+            var _props2 = this.props,
+                properties = _props2.properties,
+                filteredProperties = _props2.filteredProperties,
+                location = _props2.location;
 
 
             return _react2.default.createElement(

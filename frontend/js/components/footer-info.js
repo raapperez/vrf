@@ -30,9 +30,9 @@ var FooterInfo = function (_Component) {
     _createClass(FooterInfo, [{
         key: 'render',
         value: function render() {
-            var _props = this.props;
-            var imgUrl = _props.imgUrl;
-            var children = _props.children;
+            var _props = this.props,
+                imgUrl = _props.imgUrl,
+                children = _props.children;
 
 
             return _react2.default.createElement(

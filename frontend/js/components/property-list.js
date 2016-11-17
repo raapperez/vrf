@@ -38,9 +38,9 @@ var PropertyList = function (_Component) {
     _createClass(PropertyList, [{
         key: 'render',
         value: function render() {
-            var _props = this.props;
-            var properties = _props.properties;
-            var doneLoading = _props.doneLoading;
+            var _props = this.props,
+                properties = _props.properties,
+                doneLoading = _props.doneLoading;
 
 
             if (!doneLoading) {
@@ -58,7 +58,7 @@ var PropertyList = function (_Component) {
                     _react2.default.createElement(
                         'p',
                         { className: 'info' },
-                        'Não foram encontrados anúncios para sua busca.'
+                        'N\xE3o foram encontrados an\xFAncios para sua busca.'
                     )
                 );
             }

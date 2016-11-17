@@ -46,7 +46,7 @@ var Menu = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             null,
-                            'Anúncios'
+                            'An\xFAncios'
                         )
                     ),
                     _react2.default.createElement(
@@ -56,7 +56,7 @@ var Menu = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             null,
-                            'Novo anúncio'
+                            'Novo an\xFAncio'
                         )
                     )
                 )
