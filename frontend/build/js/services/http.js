@@ -24,8 +24,8 @@ var json = function json(response) {
 function Http(fetch) {
 
     function get(path) {
-        var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        var query = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
 
         var queryString = Object.entries(query).map(function (entry) {
@@ -47,15 +47,15 @@ function Http(fetch) {
     }
 
     function post(path) {
-        var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        var body = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
         return fetch(path, Object.assign({}, options, { method: 'POST', body: JSON.stringify(body) })).then(status).then(json);
     }
 
     function put(path) {
-        var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        var body = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
         return fetch(path, Object.assign({}, options, { method: 'PUT', body: JSON.stringify(body) })).then(status).then(json);
     }

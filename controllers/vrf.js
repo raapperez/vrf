@@ -3,19 +3,26 @@
 require('core-js');
 
 const {match} = require('react-router');
-const {serverSide} = require('../frontend/js/vrf');
-const {routes} = require('../frontend/js/vrf');
 const ReactDOMServer = require('react-dom/server');
 const _ = require('lodash');
 const fetch = require('node-fetch');
 
-const Http = require('../frontend/js/services/http').default;
-const SpotipposApi = require('../frontend/js/services/spotippos-api').default;
-const filterService = require('../frontend/js/services/filter').default;
+const env = process.env.NODE_ENV || 'development';
+
+const isDev = env === 'development';
+const p = isDev ? 'src' : 'build'; 
+
+const Http = require(`../frontend/${p}/js/services/http`).default;
+const SpotipposApi = require(`../frontend/${p}/js/services/spotippos-api`).default;
+const filterService = require(`../frontend/${p}/js/services/filter`).default;
+const {serverSide} = require(`../frontend/${p}/js/vrf`);
+const {routes} = require(`../frontend/${p}/js/vrf`);
+const {maxProperties} = require(`../frontend/${p}/js/constants`);
+
 const currencyFormatter = require('currency-formatter');
 
 const spotipposApi = new SpotipposApi(new Http(fetch));
-const {maxProperties} = require('../frontend/js/constants');
+
 
 // TODO: remove when property comes with img url
 function getRandomImg(id) {
@@ -103,6 +110,7 @@ function handleRequest(req, res, next, getData) {
                 res.status(200).render('vrf', {
                     _,
                     data: {
+                        isDev,
                         entryPoint: ReactDOMServer.renderToString(serverSide(renderProps))
                     }
                 });

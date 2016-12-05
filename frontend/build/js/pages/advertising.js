@@ -54,10 +54,10 @@ var AdvertisingPage = function (_Component) {
     _createClass(AdvertisingPage, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _props = this.props,
-                params = _props.params,
-                property = _props.property,
-                getProperty = _props.getProperty;
+            var _props = this.props;
+            var params = _props.params;
+            var property = _props.property;
+            var getProperty = _props.getProperty;
 
 
             if (!property || property.id != params.id) {
@@ -67,9 +67,9 @@ var AdvertisingPage = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _props2 = this.props,
-                property = _props2.property,
-                params = _props2.params;
+            var _props2 = this.props;
+            var property = _props2.property;
+            var params = _props2.params;
 
 
             return _react2.default.createElement(

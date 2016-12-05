@@ -10,17 +10,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
+var _propertyCard = require('./property-card');
 
-var _propertyList = require('../components/property-list');
+var _propertyCard2 = _interopRequireDefault(_propertyCard);
 
-var _propertyList2 = _interopRequireDefault(_propertyList);
+var _loading = require('./loading');
 
-var _spotipposApi = require('../services/spotipposApi');
-
-var _spotipposApi2 = _interopRequireDefault(_spotipposApi);
-
-var _vrfActions = require('../actions/vrf-actions');
+var _loading2 = _interopRequireDefault(_loading);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30,57 +26,59 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RealtiesPage = function (_Component) {
-    _inherits(RealtiesPage, _Component);
+var PropertyList = function (_Component) {
+    _inherits(PropertyList, _Component);
 
-    function RealtiesPage(props) {
-        _classCallCheck(this, RealtiesPage);
+    function PropertyList(props) {
+        _classCallCheck(this, PropertyList);
 
-        return _possibleConstructorReturn(this, (RealtiesPage.__proto__ || Object.getPrototypeOf(RealtiesPage)).call(this, props));
+        return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).call(this, props));
     }
 
-    _createClass(RealtiesPage, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _props = this.props;
-            var properties = _props.properties;
-            var getProperties = _props.getProperties;
-
-
-            if (!properties.length) {
-                getProperties();
-            }
-        }
-    }, {
+    _createClass(PropertyList, [{
         key: 'render',
         value: function render() {
-            var properties = this.props.properties;
+            var _props = this.props;
+            var properties = _props.properties;
+            var doneLoading = _props.doneLoading;
 
+
+            if (!doneLoading) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'property-list-component' },
+                    _react2.default.createElement(_loading2.default, null)
+                );
+            }
+
+            if (!properties.length) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'property-list-component' },
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'info' },
+                        'N\xE3o foram encontrados an\xFAncios para sua busca.'
+                    )
+                );
+            }
 
             return _react2.default.createElement(
                 'div',
-                { className: 'realties-page' },
-                _react2.default.createElement(_propertyList2.default, { properties: properties })
+                { className: 'property-list-component' },
+                properties.map(function (property) {
+                    return _react2.default.createElement(_propertyCard2.default, { key: property.id, property: property, showFooterBtn: true });
+                })
             );
         }
     }]);
 
-    return RealtiesPage;
+    return PropertyList;
 }(_react.Component);
 
-RealtiesPage.propTypes = {
+PropertyList.propTypes = {
     properties: _react.PropTypes.array.isRequired,
-    getProperties: _react.PropTypes.func.isRequired
+    doneLoading: _react.PropTypes.bool.isRequired
 };
 
-exports.default = (0, _reactRedux.connect)(function (state) {
-    return { properties: state.properties };
-}, function (dispatch) {
-    return {
-        getProperties: function getProperties() {
-            return _spotipposApi2.default.list('properties', { ax: 1, ay: 1, bx: 1400, by: 1000 }).then(function (response) {
-                dispatch((0, _vrfActions.setProperties)(response.properties));
-            });
-        }
-    };
-})(RealtiesPage);
+exports.default = PropertyList;

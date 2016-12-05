@@ -18,26 +18,46 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RealtyCard = function (_Component) {
-    _inherits(RealtyCard, _Component);
+var FooterInfo = function (_Component) {
+    _inherits(FooterInfo, _Component);
 
-    function RealtyCard(props) {
-        _classCallCheck(this, RealtyCard);
+    function FooterInfo(props) {
+        _classCallCheck(this, FooterInfo);
 
-        return _possibleConstructorReturn(this, (RealtyCard.__proto__ || Object.getPrototypeOf(RealtyCard)).call(this, props));
+        return _possibleConstructorReturn(this, (FooterInfo.__proto__ || Object.getPrototypeOf(FooterInfo)).call(this, props));
     }
 
-    _createClass(RealtyCard, [{
+    _createClass(FooterInfo, [{
         key: 'render',
         value: function render() {
+            var _props = this.props;
+            var imgUrl = _props.imgUrl;
+            var children = _props.children;
 
-            return _react2.default.createElement('div', null);
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'footer-info-component' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'info' },
+                    _react2.default.createElement('img', { className: 'no-select', src: imgUrl }),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        children
+                    )
+                )
+            );
         }
     }]);
 
-    return RealtyCard;
+    return FooterInfo;
 }(_react.Component);
 
-RealtyCard.propTypes = {};
+FooterInfo.propTypes = {
+    imgUrl: _react.PropTypes.string.isRequired,
+    children: _react.PropTypes.array.isRequired
+};
 
-exports.default = RealtyCard;
+exports.default = FooterInfo;

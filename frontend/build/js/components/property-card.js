@@ -45,9 +45,9 @@ var PropertyCard = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _props = this.props,
-                property = _props.property,
-                showFooterBtn = _props.showFooterBtn;
+            var _props = this.props;
+            var property = _props.property;
+            var showFooterBtn = _props.showFooterBtn;
 
 
             return _react2.default.createElement(
